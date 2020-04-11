@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import './pages/home_page.dart';
 import './pages/counter_page.dart';
+import './pages/random_words_page.dart';
 
 void main() {
   // debugPaintSizeEnabled = true;
@@ -24,6 +25,7 @@ class MyApp extends StatelessWidget {
       routes: {
         HomePage.routeName: (context) => HomePage(),
         CounterPage.routeName: (context) => CounterPage(title: 'USCIS Quiz Counter Page'),
+        RandomWordsPage.routeName: (context) => RandomWordsPage(),
       },
     );
   }
