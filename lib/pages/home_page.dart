@@ -3,6 +3,7 @@ import 'package:uscisquiz/pages/counter_page.dart';
 
 import './counter_page.dart';
 import './random_words_page.dart';
+import '../widgets/my_drawer.dart';
 
 class HomePage extends StatelessWidget {
   static const routeName = '/';
@@ -14,6 +15,7 @@ class HomePage extends StatelessWidget {
     print('[HomePage] build');
 
     return Scaffold(
+      drawer: MyDrawer(),
       appBar: AppBar(
         title: Text('HomePage'),
       ),
