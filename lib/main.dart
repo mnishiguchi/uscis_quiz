@@ -20,11 +20,13 @@ class MyApp extends StatelessWidget {
       title: 'USCIS Quiz',
       theme: ThemeData(
         primarySwatch: Colors.green,
+        primaryColor: Colors.white,
       ),
       initialRoute: HomePage.routeName,
       routes: {
         HomePage.routeName: (context) => HomePage(),
-        CounterPage.routeName: (context) => CounterPage(title: 'USCIS Quiz Counter Page'),
+        CounterPage.routeName: (context) =>
+            CounterPage(title: 'USCIS Quiz Counter Page'),
         RandomWordsPage.routeName: (context) => RandomWordsPage(),
       },
     );
