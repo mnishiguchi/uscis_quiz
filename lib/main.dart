@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 // import 'package:flutter/rendering.dart';
 
 import './pages/home_page.dart';
 import './pages/counter_page.dart';
 import './pages/random_words_page.dart';
+import './models/counter_bloc.dart';
 
 void main() {
   // debugPaintSizeEnabled = true;
@@ -25,8 +27,10 @@ class MyApp extends StatelessWidget {
       initialRoute: HomePage.routeName,
       routes: {
         HomePage.routeName: (context) => HomePage(),
-        CounterPage.routeName: (context) =>
-            CounterPage(title: 'USCIS Quiz Counter Page'),
+        CounterPage.routeName: (context) => BlocProvider<CounterBloc>(
+              create: (context) => CounterBloc(),
+              child: CounterPage(title: 'USCIS Quiz Counter Page'),
+            ),
         RandomWordsPage.routeName: (context) => RandomWordsPage(),
       },
     );
