@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:english_words/english_words.dart';
+
+import '../widgets/random_words.dart';
 
 class RandomWordsPage extends StatelessWidget {
   static const routeName = '/random_words';
@@ -10,14 +11,12 @@ class RandomWordsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     print('[RandomWordsPage] build');
 
-    final wordPair = WordPair.random();
-
     return Scaffold(
       appBar: AppBar(
         title: Text('RandomWordsPage'),
       ),
       body: Center(
-        child: Text(wordPair.asPascalCase),
+        child: RandomWords(),
       ),
     );
   }
