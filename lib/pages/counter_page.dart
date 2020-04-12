@@ -54,12 +54,31 @@ class CounterPage extends StatelessWidget {
           ),
         );
       }),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          counterBloc.add(CounterEvent.increment);
-        },
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
+      floatingActionButton: Column(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: <Widget>[
+          Padding(
+            padding: EdgeInsets.symmetric(vertical: 5.0),
+            child: FloatingActionButton(
+              heroTag: null,
+              child: Icon(Icons.add),
+              onPressed: () {
+                counterBloc.add(CounterEvent.increment);
+              },
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(vertical: 5.0),
+            child: FloatingActionButton(
+              heroTag: null,
+              child: Icon(Icons.remove),
+              onPressed: () {
+                counterBloc.add(CounterEvent.decrement);
+              },
+            ),
+          ),
+        ],
       ),
     );
   }
