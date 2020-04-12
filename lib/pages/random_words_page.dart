@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:english_words/english_words.dart' as English;
+import 'package:english_words/english_words.dart'
+    show WordPair, generateWordPairs;
 
 class RandomWordsPage extends StatefulWidget {
   static const routeName = '/random_words';
@@ -11,8 +12,8 @@ class RandomWordsPage extends StatefulWidget {
 }
 
 class RandomWordsPageState extends State<RandomWordsPage> {
-  final _suggestions = <English.WordPair>[];
-  final _saved = Set<English.WordPair>();
+  final _suggestions = <WordPair>[];
+  final _saved = Set<WordPair>();
   final _biggerFont = const TextStyle(fontSize: 18.0);
 
   @override
@@ -40,7 +41,7 @@ class RandomWordsPageState extends State<RandomWordsPage> {
       MaterialPageRoute<void>(
         builder: (BuildContext context) {
           final Iterable<ListTile> tiles = _saved.map(
-            (English.WordPair wordPair) {
+            (WordPair wordPair) {
               return ListTile(
                 title: Text(
                   wordPair.asPascalCase,
@@ -83,7 +84,7 @@ class RandomWordsPageState extends State<RandomWordsPage> {
         // If you’ve reached the end of the available word pairings, then
         // generate 10 more and add them to the suggestions list
         if (_suggestions.length <= suggestionIndex) {
-          _suggestions.addAll(English.generateWordPairs().take(10));
+          _suggestions.addAll(generateWordPairs().take(10));
         }
 
         return _buildRow(_suggestions[suggestionIndex]);
@@ -91,7 +92,7 @@ class RandomWordsPageState extends State<RandomWordsPage> {
     );
   }
 
-  Widget _buildRow(English.WordPair wordPair) {
+  Widget _buildRow(WordPair wordPair) {
     final bool alreadySaved = _saved.contains(wordPair);
 
     return ListTile(

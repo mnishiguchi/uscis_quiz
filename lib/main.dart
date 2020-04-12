@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 // import 'package:flutter/rendering.dart';
 
-import './pages/home_page.dart';
-import './pages/counter_page.dart';
-import './pages/random_words_page.dart';
-import './models/counter_bloc.dart';
+import 'package:uscisquiz/pages/home_page.dart';
+import 'package:uscisquiz/pages/counter_page.dart';
+import 'package:uscisquiz/pages/random_words_page.dart';
+import 'package:uscisquiz/blocs/counter_bloc.dart';
 
 void main() {
   // debugPaintSizeEnabled = true;

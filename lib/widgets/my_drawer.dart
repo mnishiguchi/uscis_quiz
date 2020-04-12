@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:uscisquiz/pages/home_page.dart';
 
-import '../pages/home_page.dart';
-import '../pages/counter_page.dart';
-import '../pages/random_words_page.dart';
+import 'package:uscisquiz/pages/home_page.dart';
+import 'package:uscisquiz/pages/counter_page.dart';
+import 'package:uscisquiz/pages/random_words_page.dart';
 
 class MyDrawer extends StatelessWidget {
   const MyDrawer({Key key}) : super(key: key);
