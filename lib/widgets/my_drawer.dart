@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:uscisquiz/pages/home_page.dart';
 import 'package:uscisquiz/pages/counter_page.dart';
 import 'package:uscisquiz/pages/random_words_page.dart';
+import 'package:uscisquiz/pages/blog_posts_page.dart';
 
 class MyDrawer extends StatelessWidget {
   const MyDrawer({Key key}) : super(key: key);
@@ -35,6 +36,13 @@ class MyDrawer extends StatelessWidget {
             title: Text('RandomWords'),
             onTap: () {
               Navigator.popAndPushNamed(context, RandomWordsPage.routeName);
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.list),
+            title: Text('InfiniteList'),
+            onTap: () {
+              Navigator.popAndPushNamed(context, BlogPostsPage.routeName);
             },
           ),
         ],

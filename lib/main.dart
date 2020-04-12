@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 // import 'package:flutter/rendering.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:http/http.dart' as http;
 
-import 'package:uscisquiz/pages/home_page.dart';
-import 'package:uscisquiz/pages/counter_page.dart';
-import 'package:uscisquiz/pages/random_words_page.dart';
-import 'package:uscisquiz/blocs/counter_bloc.dart';
+import 'package:uscisquiz/blocs/blocs.dart';
+import 'package:uscisquiz/pages/pages.dart';
 
 void main() {
   // debugPaintSizeEnabled = true;
   // debugPaintBaselinesEnabled = true;
   // debugPaintPointersEnabled = true;
+  BlocSupervisor.delegate = SimpleBlocDelegate();
+
   runApp(MyApp());
 }
 
@@ -32,6 +33,12 @@ class MyApp extends StatelessWidget {
               child: CounterPage(title: 'USCIS Quiz Counter Page'),
             ),
         RandomWordsPage.routeName: (context) => RandomWordsPage(),
+        BlogPostsPage.routeName: (context) => BlocProvider(
+              create: (context) =>
+                  // Instantiate the bloc and fetch the initial batch.
+                  BlogPostBloc(httpClient: http.Client())..add(BlogPostEventFetch()),
+              child: BlogPostsPage(),
+            ),
       },
     );
   }

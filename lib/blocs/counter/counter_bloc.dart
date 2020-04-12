@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 
-enum CounterEvent { increment, decrement }
-
+import 'package:uscisquiz/blocs/blocs.dart';
 class CounterBloc extends Bloc<CounterEvent, int> {
   @override
   int get initialState => 0;

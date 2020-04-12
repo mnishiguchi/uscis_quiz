@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:uscisquiz/blocs/counter_bloc.dart';
+import 'package:uscisquiz/blocs/blocs.dart';
 
 class CounterPage extends StatelessWidget {
   static const routeName = '/counter';
