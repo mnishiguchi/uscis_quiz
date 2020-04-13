@@ -18,21 +18,24 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         title: Text('HomePage'),
       ),
-      body: Column(
-        children: <Widget>[
-          RaisedButton(
-            child: Text('Counter'),
-            onPressed: () {
-              Navigator.pushNamed(context, CounterPage.routeName);
-            },
-          ),
-          RaisedButton(
-            child: Text('Random Words'),
-            onPressed: () {
-              Navigator.pushNamed(context, RandomWordsPage.routeName);
-            },
-          ),
-        ],
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            RaisedButton(
+              child: Text('Counter'),
+              onPressed: () {
+                Navigator.pushNamed(context, CounterPage.routeName);
+              },
+            ),
+            RaisedButton(
+              child: Text('Random Words'),
+              onPressed: () {
+                Navigator.pushNamed(context, RandomWordsPage.routeName);
+              },
+            ),
+          ],
+        ),
       ),
     );
   }
