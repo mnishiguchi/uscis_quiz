@@ -9,8 +9,6 @@ import 'package:uscisquiz/widgets/bottom_loader.dart';
 class BlogPostsPage extends StatefulWidget {
   static const routeName = '/blog_posts';
 
-  BlogPostsPage();
-
   @override
   BlogPostsPageState createState() => BlogPostsPageState();
 }

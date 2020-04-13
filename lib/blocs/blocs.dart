@@ -5,3 +5,6 @@ export './blog_post/blog_post_state.dart';
 export './counter/counter_bloc.dart';
 export './counter/counter_event.dart';
 export './simple_bloc_delegate.dart';
+export './weather/weather_bloc.dart';
+export './weather/weather_event.dart';
+export './weather/weather_state.dart';

@@ -7,8 +7,6 @@ import 'package:uscisquiz/widgets/my_drawer.dart';
 class HomePage extends StatelessWidget {
   static const routeName = '/';
 
-  HomePage();
-
   @override
   Widget build(BuildContext context) {
     print('[HomePage] build');

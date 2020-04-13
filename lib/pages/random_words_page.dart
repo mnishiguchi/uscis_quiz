@@ -5,8 +5,6 @@ import 'package:english_words/english_words.dart'
 class RandomWordsPage extends StatefulWidget {
   static const routeName = '/random_words';
 
-  RandomWordsPage();
-
   @override
   RandomWordsPageState createState() => RandomWordsPageState();
 }
@@ -70,8 +68,6 @@ class RandomWordsPageState extends State<RandomWordsPage> {
   }
 
   Widget _buildRandomWords() {
-    print('[RandomWordsPageState] _buildRandomWords');
-
     return ListView.builder(
       padding: const EdgeInsets.all(16.0),
       itemBuilder: (context, i) {

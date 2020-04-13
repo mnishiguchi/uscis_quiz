@@ -12,4 +12,13 @@ class BlogPost extends Equatable {
 
   @override
   String toString() => 'BlogPost { id: $id }';
+
+  // Creates an instance from the API response JSON.
+  static BlogPost fromJson(dynamic json) {
+    return BlogPost(
+      id: json['id'],
+      title: json['title'],
+      body: json['body'],
+    );
+  }
 }

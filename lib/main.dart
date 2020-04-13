@@ -5,6 +5,7 @@ import 'package:http/http.dart' as http;
 
 import 'package:uscisquiz/blocs/blocs.dart';
 import 'package:uscisquiz/pages/pages.dart';
+import 'package:uscisquiz/repositories/repositories.dart';
 
 void main() {
   // debugPaintSizeEnabled = true;
@@ -12,10 +13,34 @@ void main() {
   // debugPaintPointersEnabled = true;
   BlocSupervisor.delegate = SimpleBlocDelegate();
 
-  runApp(MyApp());
+  final blogPostRepository = BlogPostRepository(
+      blogPostClient: BlogPostApiClient(httpClient: http.Client()));
+
+  runApp(
+    // Global blocs
+    MultiBlocProvider(
+      providers: [
+        BlocProvider<BlogPostBloc>(
+          // Instantiate the bloc and fetch the initial batch.
+          create: (_) {
+            return BlogPostBloc(blogPostRepository: blogPostRepository)
+              ..add(BlogPostEventFetch());
+          },
+        ),
+        BlocProvider<CounterBloc>(
+          create: (_) => CounterBloc(),
+        ),
+      ],
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
+  final weatherRepository = WeatherRepository(
+    weatherClient: WeatherApiClient(httpClient: http.Client()),
+  );
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -25,20 +50,20 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.green,
         primaryColor: Colors.white,
       ),
+
       initialRoute: HomePage.routeName,
       routes: {
-        HomePage.routeName: (context) => HomePage(),
-        CounterPage.routeName: (context) => BlocProvider<CounterBloc>(
-              create: (context) => CounterBloc(),
-              child: CounterPage(title: 'USCIS Quiz Counter Page'),
-            ),
-        RandomWordsPage.routeName: (context) => RandomWordsPage(),
-        BlogPostsPage.routeName: (context) => BlocProvider(
-              create: (context) =>
-                  // Instantiate the bloc and fetch the initial batch.
-                  BlogPostBloc(httpClient: http.Client())..add(BlogPostEventFetch()),
-              child: BlogPostsPage(),
-            ),
+        HomePage.routeName: (_) => HomePage(),
+        CounterPage.routeName: (_) => CounterPage(),
+        RandomWordsPage.routeName: (_) => RandomWordsPage(),
+        BlogPostsPage.routeName: (_) => BlogPostsPage(),
+        WeatherPage.routeName: (_) {
+          // This bloc only exists as long as the page is displayed.
+          return BlocProvider(
+            create: (_) => WeatherBloc(weatherRepository: weatherRepository),
+            child: WeatherPage(),
+          );
+        }
       },
     );
   }

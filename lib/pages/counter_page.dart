@@ -6,20 +6,13 @@ import 'package:uscisquiz/blocs/blocs.dart';
 class CounterPage extends StatelessWidget {
   static const routeName = '/counter';
 
-  CounterPage({Key key, this.title}) : super(key: key);
-
-  final String title;
-
   @override
   Widget build(BuildContext context) {
     print('[CounterPage] build');
 
-    // https://github.com/felangel/bloc/issues/587
-    final counterBloc = BlocProvider.of<CounterBloc>(context);
-
     return Scaffold(
       appBar: AppBar(
-        title: Text(title),
+        title: Text('Counter'),
       ),
       body: BlocBuilder<CounterBloc, int>(builder: (context, count) {
         return Center(
@@ -38,13 +31,15 @@ class CounterPage extends StatelessWidget {
                 children: <Widget>[
                   RaisedButton(
                     onPressed: () {
-                      counterBloc.add(CounterEvent.decrement);
+                      BlocProvider.of<CounterBloc>(context)
+                          .add(CounterEvent.decrement);
                     },
                     child: Text('-'),
                   ),
                   RaisedButton(
                     onPressed: () {
-                      counterBloc.add(CounterEvent.increment);
+                      BlocProvider.of<CounterBloc>(context)
+                          .add(CounterEvent.increment);
                     },
                     child: Text('+'),
                   ),
@@ -64,7 +59,8 @@ class CounterPage extends StatelessWidget {
               heroTag: null,
               child: Icon(Icons.add),
               onPressed: () {
-                counterBloc.add(CounterEvent.increment);
+                BlocProvider.of<CounterBloc>(context)
+                    .add(CounterEvent.increment);
               },
             ),
           ),
@@ -74,7 +70,8 @@ class CounterPage extends StatelessWidget {
               heroTag: null,
               child: Icon(Icons.remove),
               onPressed: () {
-                counterBloc.add(CounterEvent.decrement);
+                BlocProvider.of<CounterBloc>(context)
+                    .add(CounterEvent.decrement);
               },
             ),
           ),
