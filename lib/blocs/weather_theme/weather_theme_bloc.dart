@@ -1,8 +1,11 @@
 import 'package:bloc/bloc.dart';
+import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
-import 'package:uscisquiz/blocs/blocs.dart';
 import 'package:uscisquiz/models/models.dart';
+
+part 'weather_theme_event.dart';
+part 'weather_theme_state.dart';
 
 class WeatherThemeBloc extends Bloc<ThemeEvent, WeatherThemeState> {
   WeatherThemeState get initialState => WeatherThemeState(

@@ -1,4 +1,4 @@
-import 'package:equatable/equatable.dart';
+part of 'blog_post_bloc.dart';
 
 // Extends Equatable so that we can compare instances.
 // https://pub.dev/packages/equatable

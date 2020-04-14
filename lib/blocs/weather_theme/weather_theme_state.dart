@@ -1,5 +1,4 @@
-import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
+part of 'weather_theme_bloc.dart';
 
 class WeatherThemeState extends Equatable {
   final ThemeData theme;

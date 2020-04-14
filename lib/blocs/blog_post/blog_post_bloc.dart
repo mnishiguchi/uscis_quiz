@@ -1,12 +1,15 @@
 import 'dart:async';
 
+import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:bloc/bloc.dart';
 
-import 'package:uscisquiz/blocs/blocs.dart';
 import 'package:uscisquiz/models/models.dart';
 import 'package:uscisquiz/repositories/repositories.dart';
+
+part 'blog_post_event.dart';
+part 'blog_post_state.dart';
 
 class BlogPostBloc extends Bloc<BlogPostEvent, BlogPostState> {
   static const FETCH_LIMIT = 20;

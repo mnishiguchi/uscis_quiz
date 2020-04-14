@@ -1,7 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:equatable/equatable.dart';
-
-import 'package:uscisquiz/models/models.dart';
+part of 'weather_theme_bloc.dart';
 
 abstract class ThemeEvent extends Equatable {
   const ThemeEvent();

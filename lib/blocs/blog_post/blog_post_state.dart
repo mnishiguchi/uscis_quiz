@@ -1,6 +1,4 @@
-import 'package:equatable/equatable.dart';
-
-import 'package:uscisquiz/models/models.dart';
+part of 'blog_post_bloc.dart';
 
 // Extends Equatable so that we can compare instances.
 // https://pub.dev/packages/equatableabstract

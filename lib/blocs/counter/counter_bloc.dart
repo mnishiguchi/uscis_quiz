@@ -1,6 +1,7 @@
+import 'dart:async';
 import 'package:bloc/bloc.dart';
 
-import 'package:uscisquiz/blocs/blocs.dart';
+part 'counter_event.dart';
 class CounterBloc extends Bloc<CounterEvent, int> {
   @override
   int get initialState => 0;
