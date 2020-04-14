@@ -59,35 +59,35 @@ class _WeatherPageState extends State<WeatherPage> {
           },
           // Rebuild the UI.
           builder: (_, weatherState) {
-            if (weatherState is WeatherStateEmpty) {
-              return Center(child: Text('Please Select a Location'));
+            switch (weatherState.runtimeType) {
+              case (WeatherStateEmpty):
+                return Center(child: Text('Please Select a Location'));
+              case (WeatherStateLoading):
+                return Center(child: CircularProgressIndicator());
+              case (WeatherStateLoaded):
+                final weather = (weatherState as WeatherStateLoaded).weather;
+                return BlocBuilder<WeatherThemeBloc, WeatherThemeState>(
+                  builder: (_, weatherThemeState) {
+                    return GradientContainer(
+                      color: weatherThemeState.color,
+                      child: RefreshIndicator(
+                        onRefresh: () {
+                          _updateWeather(context, weather.location);
+                          return _refreshCompleter.future;
+                        },
+                        child: _buildWeatherListView(weather),
+                      ),
+                    );
+                  },
+                );
+              case (WeatherStateError):
+                return Text(
+                  'Something went wrong!',
+                  style: TextStyle(color: Colors.red),
+                );
+              default:
+                throw Exception('Invalid weather state $weatherState');
             }
-            if (weatherState is WeatherStateLoading) {
-              return Center(child: CircularProgressIndicator());
-            }
-            if (weatherState is WeatherStateLoaded) {
-              return BlocBuilder<WeatherThemeBloc, WeatherThemeState>(
-                builder: (_, weatherThemeState) {
-                  return GradientContainer(
-                    color: weatherThemeState.color,
-                    child: RefreshIndicator(
-                      onRefresh: () {
-                        _updateWeather(context, weatherState.weather.location);
-                        return _refreshCompleter.future;
-                      },
-                      child: _buildWeatherListView(weatherState.weather),
-                    ),
-                  );
-                },
-              );
-            }
-            if (weatherState is WeatherStateError) {
-              return Text(
-                'Something went wrong!',
-                style: TextStyle(color: Colors.red),
-              );
-            }
-            throw Exception('Invalid weather state $weatherState');
           },
         ),
       ),
@@ -102,7 +102,8 @@ class _WeatherPageState extends State<WeatherPage> {
     BlocProvider.of<WeatherBloc>(context).add(WeatherEventRefresh(city: city));
   }
 
-  void _updateWeatherTheme(BuildContext context, WeatherCondition weatherCondition) {
+  void _updateWeatherTheme(
+      BuildContext context, WeatherCondition weatherCondition) {
     BlocProvider.of<WeatherThemeBloc>(context).add(
       ThemeEventWeatherChanged(weatherCondition: weatherCondition),
     );
