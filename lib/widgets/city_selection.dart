@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// A temporary text input page that will return the input value to the caller.
 class CitySelection extends StatefulWidget {
   @override
   State<CitySelection> createState() => _CitySelectionState();

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:uscisquiz/blocs/blocs.dart';
+import 'package:uscisquiz/models/models.dart';
 import 'package:uscisquiz/widgets/widgets.dart';
 
 // This is stateful because it needs to maintain a completer.
@@ -20,7 +21,7 @@ class _WeatherPageState extends State<WeatherPage> {
     super.initState();
     // In order to use the RefreshIndicator we had to create a Completer which
     // allows us to produce a Future which we can complete at a later time.
-    _refreshCompleter = Completer<void>();
+    _initRefreshCompleter();
   }
 
   @override
@@ -34,16 +35,15 @@ class _WeatherPageState extends State<WeatherPage> {
           IconButton(
             icon: Icon(Icons.search),
             onPressed: () async {
+              // Navigate to the city selectiton and return the selected value.
               final city = await Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (context) => CitySelection(),
                 ),
               );
-              if (city != null) {
-                BlocProvider.of<WeatherBloc>(context)
-                    .add(WeatherEventFetch(city: city));
-              }
+              if (city == null) return;
+              _loadWeather(context, city);
             },
           )
         ],
@@ -53,11 +53,12 @@ class _WeatherPageState extends State<WeatherPage> {
           // Perform side-effects.
           listener: (context, weatherState) {
             if (weatherState is WeatherStateLoaded) {
-              _completeRefreshCompleter();
+              _updateWeatherTheme(context, weatherState.weather.condition);
+              _initRefreshCompleter();
             }
           },
           // Rebuild the UI.
-          builder: (context, weatherState) {
+          builder: (_, weatherState) {
             if (weatherState is WeatherStateEmpty) {
               return Center(child: Text('Please Select a Location'));
             }
@@ -65,13 +66,19 @@ class _WeatherPageState extends State<WeatherPage> {
               return Center(child: CircularProgressIndicator());
             }
             if (weatherState is WeatherStateLoaded) {
-              return RefreshIndicator(
-                onRefresh: () {
-                  BlocProvider.of<WeatherBloc>(context).add(
-                      WeatherEventRefresh(city: weatherState.weather.location));
-                  return _refreshCompleter.future;
+              return BlocBuilder<WeatherThemeBloc, WeatherThemeState>(
+                builder: (_, weatherThemeState) {
+                  return GradientContainer(
+                    color: weatherThemeState.color,
+                    child: RefreshIndicator(
+                      onRefresh: () {
+                        _updateWeather(context, weatherState.weather.location);
+                        return _refreshCompleter.future;
+                      },
+                      child: _buildWeatherListView(weatherState.weather),
+                    ),
+                  );
                 },
-                child: _buildWeatherListView(weatherState.weather),
               );
             }
             if (weatherState is WeatherStateError) {
@@ -87,7 +94,21 @@ class _WeatherPageState extends State<WeatherPage> {
     );
   }
 
-  void _completeRefreshCompleter() {
+  void _loadWeather(BuildContext context, String city) {
+    BlocProvider.of<WeatherBloc>(context).add(WeatherEventFetch(city: city));
+  }
+
+  void _updateWeather(BuildContext context, String city) {
+    BlocProvider.of<WeatherBloc>(context).add(WeatherEventRefresh(city: city));
+  }
+
+  void _updateWeatherTheme(BuildContext context, WeatherCondition weatherCondition) {
+    BlocProvider.of<WeatherThemeBloc>(context).add(
+      ThemeEventWeatherChanged(weatherCondition: weatherCondition),
+    );
+  }
+
+  void _initRefreshCompleter() {
     _refreshCompleter?.complete();
     _refreshCompleter = Completer<void>();
   }

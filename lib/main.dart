@@ -30,6 +30,9 @@ void main() {
         BlocProvider<CounterBloc>(
           create: (_) => CounterBloc(),
         ),
+        BlocProvider<WeatherThemeBloc>(
+          create: (_) => WeatherThemeBloc(),
+        ),
       ],
       child: MyApp(),
     ),
@@ -43,27 +46,32 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      // debugShowMaterialGrid: true,
-      title: 'USCIS Quiz',
-      theme: ThemeData(
-        primarySwatch: Colors.green,
-        primaryColor: Colors.white,
-      ),
+    return BlocBuilder<WeatherThemeBloc, WeatherThemeState>(
+      builder: (context, themeState) {
+        return MaterialApp(
+          // debugShowMaterialGrid: true,
+          title: 'USCIS Quiz',
+          theme: ThemeData(
+            primarySwatch: Colors.green,
+            primaryColor: Colors.white,
+          ),
 
-      initialRoute: HomePage.routeName,
-      routes: {
-        HomePage.routeName: (_) => HomePage(),
-        CounterPage.routeName: (_) => CounterPage(),
-        RandomWordsPage.routeName: (_) => RandomWordsPage(),
-        BlogPostsPage.routeName: (_) => BlogPostsPage(),
-        WeatherPage.routeName: (_) {
-          // This bloc only exists as long as the page is displayed.
-          return BlocProvider(
-            create: (_) => WeatherBloc(weatherRepository: weatherRepository),
-            child: WeatherPage(),
-          );
-        }
+          initialRoute: HomePage.routeName,
+          routes: {
+            HomePage.routeName: (_) => HomePage(),
+            CounterPage.routeName: (_) => CounterPage(),
+            RandomWordsPage.routeName: (_) => RandomWordsPage(),
+            BlogPostsPage.routeName: (_) => BlogPostsPage(),
+            WeatherPage.routeName: (_) {
+              // This bloc only exists as long as the page is displayed.
+              return BlocProvider(
+                create: (_) =>
+                    WeatherBloc(weatherRepository: weatherRepository),
+                child: WeatherPage(),
+              );
+            }
+          },
+        );
       },
     );
   }
