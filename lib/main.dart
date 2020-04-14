@@ -30,6 +30,9 @@ void main() {
         BlocProvider<CounterBloc>(
           create: (_) => CounterBloc(),
         ),
+        BlocProvider<SettingsBloc>(
+          create: (_) => SettingsBloc(),
+        ),
         BlocProvider<WeatherThemeBloc>(
           create: (_) => WeatherThemeBloc(),
         ),
@@ -53,7 +56,7 @@ class MyApp extends StatelessWidget {
           title: 'USCIS Quiz',
           theme: ThemeData(
             primarySwatch: Colors.green,
-            primaryColor: Colors.white,
+            primaryColor: Colors.grey[100],
           ),
 
           initialRoute: HomePage.routeName,
@@ -62,6 +65,7 @@ class MyApp extends StatelessWidget {
             CounterPage.routeName: (_) => CounterPage(),
             RandomWordsPage.routeName: (_) => RandomWordsPage(),
             BlogPostsPage.routeName: (_) => BlogPostsPage(),
+            SettingsPage.routeName: (_) => SettingsPage(),
             WeatherPage.routeName: (_) {
               // This bloc only exists as long as the page is displayed.
               return BlocProvider(

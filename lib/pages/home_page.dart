@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:uscisquiz/pages/counter_page.dart';
-import 'package:uscisquiz/pages/random_words_page.dart';
+import 'package:uscisquiz/pages/pages.dart';
 import 'package:uscisquiz/widgets/my_drawer.dart';
 
 class HomePage extends StatelessWidget {

@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:uscisquiz/blocs/blocs.dart';
 import 'package:uscisquiz/models/models.dart';
+import 'package:uscisquiz/pages/pages.dart';
 import 'package:uscisquiz/widgets/widgets.dart';
 
 // This is stateful because it needs to maintain a completer.
@@ -33,13 +34,24 @@ class _WeatherPageState extends State<WeatherPage> {
         title: Text('Weather'),
         actions: <Widget>[
           IconButton(
+            icon: Icon(Icons.settings),
+            onPressed: () async {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => SettingsPage(),
+                ),
+              );
+            },
+          ),
+          IconButton(
             icon: Icon(Icons.search),
             onPressed: () async {
               // Navigate to the city selectiton and return the selected value.
               final city = await Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => CitySelection(),
+                  builder: (context) => CitySelectionForm(),
                 ),
               );
               if (city == null) return;
@@ -129,9 +141,7 @@ class _WeatherPageState extends State<WeatherPage> {
         Padding(
           padding: EdgeInsets.symmetric(vertical: 50.0),
           child: Center(
-            child: CombinedWeatherTemperature(
-              weather: weather,
-            ),
+            child: CombinedWeatherInfo(weather: weather),
           ),
         ),
       ],

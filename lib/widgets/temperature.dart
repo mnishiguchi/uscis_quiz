@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
 
+import 'package:uscisquiz/blocs/blocs.dart';
+
 class Temperature extends StatelessWidget {
   final double temperature;
   final double low;
   final double high;
+  final TemperatureUnits unit;
 
   Temperature({
     Key key,
     this.temperature,
     this.low,
     this.high,
+    this.unit,
   }) : super(key: key);
 
   @override
@@ -23,7 +27,7 @@ class Temperature extends StatelessWidget {
             style: TextStyle(
               fontSize: 32,
               fontWeight: FontWeight.w600,
-
+              color: Colors.grey[100],
             ),
           ),
         ),
@@ -34,7 +38,7 @@ class Temperature extends StatelessWidget {
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w100,
-
+                color: Colors.grey[100],
               ),
             ),
             Text(
@@ -42,7 +46,7 @@ class Temperature extends StatelessWidget {
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w100,
-
+                color: Colors.grey[100],
               ),
             )
           ],
@@ -51,5 +55,8 @@ class Temperature extends StatelessWidget {
     );
   }
 
-  int _formattedTemperature(double t) => t.round();
+  int _toFahrenheit(double celsius) => ((celsius * 9 / 5) + 32).round();
+
+  int _formattedTemperature(double t) =>
+      unit == TemperatureUnits.f ? _toFahrenheit(t) : t.round();
 }

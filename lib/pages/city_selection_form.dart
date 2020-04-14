@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
 // A temporary text input page that will return the input value to the caller.
-class CitySelection extends StatefulWidget {
+class CitySelectionForm extends StatefulWidget {
   @override
-  State<CitySelection> createState() => _CitySelectionState();
+  State<CitySelectionForm> createState() => _CitySelectionFormState();
 }
 
-class _CitySelectionState extends State<CitySelection> {
+class _CitySelectionFormState extends State<CitySelectionForm> {
   final TextEditingController _textController = TextEditingController();
 
   @override
