@@ -35,28 +35,32 @@ class BlogPostBloc extends Bloc<BlogPostEvent, BlogPostState> {
   // Fired every time an event is added.
   @override
   Stream<BlogPostState> mapEventToState(BlogPostEvent event) async* {
-    final currentState = state;
-    if (event is BlogPostEventFetch && !_hasReachedMax(currentState)) {
-      try {
-        if (currentState is BlogPostStateUninitialized) {
-          final List<BlogPost> blogPosts =
-              await blogPostRepository.getBlogPosts(0, FETCH_LIMIT);
-          yield BlogPostStateLoaded(blogPosts: blogPosts, hasReachedMax: false);
-          return;
-        }
-        if (currentState is BlogPostStateLoaded) {
-          final List<BlogPost> blogPosts = await blogPostRepository
-              .getBlogPosts(currentState.blogPosts.length, FETCH_LIMIT);
-          yield blogPosts.isEmpty
-              ? currentState.copyWith(hasReachedMax: true)
-              : BlogPostStateLoaded(
-                  blogPosts: currentState.blogPosts + blogPosts,
-                  hasReachedMax: false,
-                );
-        }
-      } catch (_) {
-        yield BlogPostStateError();
+    if (event is BlogPostEventFetch && !_hasReachedMax(state)) {
+      yield* onFetch(event);
+    }
+  }
+
+  Stream<BlogPostState> onFetch(BlogPostEventFetch event) async* {
+    try {
+      if (state is BlogPostStateUninitialized) {
+        final List<BlogPost> blogPosts =
+            await blogPostRepository.getBlogPosts(0, FETCH_LIMIT);
+        yield BlogPostStateLoaded(blogPosts: blogPosts, hasReachedMax: false);
+        return;
       }
+      if (state is BlogPostStateLoaded) {
+        final currentState = state as BlogPostStateLoaded;
+        final List<BlogPost> blogPosts = await blogPostRepository.getBlogPosts(
+            currentState.blogPosts.length, FETCH_LIMIT);
+        yield blogPosts.isEmpty
+            ? currentState.copyWith(hasReachedMax: true)
+            : BlogPostStateLoaded(
+                blogPosts: currentState.blogPosts + blogPosts,
+                hasReachedMax: false,
+              );
+      }
+    } catch (_) {
+      yield BlogPostStateError();
     }
   }
 

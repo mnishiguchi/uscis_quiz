@@ -14,8 +14,9 @@ class BlogPostApiClient {
 
   Future<List<BlogPost>> fetchBlogPosts(int startIndex, int limit) async {
     // This API has 100 blog posts.
-    final response =
-        await httpClient.get('$baseUrl/posts?_start=$startIndex&_limit=$limit');
+    final url = '$baseUrl/posts?_start=$startIndex&_limit=$limit';
+    print('[BlogPostApiClient.fetchBlogPosts] $url');
+    final response = await httpClient.get(url);
     if (response.statusCode != 200) {
       throw Exception('Error fetching blog posts');
     }
