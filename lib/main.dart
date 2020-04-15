@@ -16,6 +16,8 @@ void main() {
   final blogPostRepository = BlogPostRepository(
       blogPostClient: BlogPostApiClient(httpClient: http.Client()));
 
+  final uscisQuizRepository = UscisQuizRepository();
+
   runApp(
     // Global blocs
     MultiBlocProvider(
@@ -35,6 +37,12 @@ void main() {
         ),
         BlocProvider<WeatherThemeBloc>(
           create: (_) => WeatherThemeBloc(),
+        ),
+        BlocProvider<UscisQuizBloc>(
+          create: (_) {
+            return UscisQuizBloc(uscisQuizRepository: uscisQuizRepository)
+              ..add(UscisQuizEventFetch());
+          },
         ),
       ],
       child: MyApp(),
@@ -59,9 +67,9 @@ class MyApp extends StatelessWidget {
             primaryColor: Colors.grey[100],
           ),
 
-          initialRoute: HomePage.routeName,
+          initialRoute: QuestionsPage.routeName,
           routes: {
-            HomePage.routeName: (_) => HomePage(),
+            QuestionsPage.routeName: (_) => QuestionsPage(),
             CounterPage.routeName: (_) => CounterPage(),
             RandomWordsPage.routeName: (_) => RandomWordsPage(),
             BlogPostsPage.routeName: (_) => BlogPostsPage(),

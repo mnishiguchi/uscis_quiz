@@ -22,6 +22,13 @@ class MyDrawer extends StatelessWidget {
             },
           ),
           ListTile(
+            leading: Icon(Icons.question_answer),
+            title: Text('Questions'),
+            onTap: () {
+              Navigator.popAndPushNamed(context, QuestionsPage.routeName);
+            },
+          ),
+          ListTile(
             leading: Icon(Icons.watch),
             title: Text('Counter'),
             onTap: () {

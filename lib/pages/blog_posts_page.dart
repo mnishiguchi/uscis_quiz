@@ -73,7 +73,7 @@ class BlogPostsPageState extends State<BlogPostsPage> {
     }
 
     return Center(
-      child: CircularProgressIndicator(),
+      child: Text('Something went wrong'),
     );
   }
 

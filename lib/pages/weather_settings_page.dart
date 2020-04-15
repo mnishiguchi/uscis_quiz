@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:uscisquiz/blocs/blocs.dart';
 
 class WeatherSettingsPage extends StatelessWidget {
-  static const routeName = '/settings';
+  static const routeName = '/weather_settings';
 
   @override
   Widget build(BuildContext context) {

@@ -1,7 +1,6 @@
 part of 'blog_post_bloc.dart';
 
-// Extends Equatable so that we can compare instances.
-// https://pub.dev/packages/equatableabstract
+@immutable
 abstract class BlogPostState extends Equatable {
   const BlogPostState();
 
