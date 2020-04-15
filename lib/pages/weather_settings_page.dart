@@ -3,18 +3,18 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:uscisquiz/blocs/blocs.dart';
 
-class SettingsPage extends StatelessWidget {
+class WeatherSettingsPage extends StatelessWidget {
   static const routeName = '/settings';
 
   @override
   Widget build(BuildContext context) {
-    print('[SettingsPage] build');
+    print('[WeatherSettingsPage] build');
 
     return Scaffold(
-      appBar: AppBar(title: Text('SettingsPage')),
+      appBar: AppBar(title: Text('WeatherSettingsPage')),
       body: ListView(
         children: <Widget>[
-          BlocBuilder<SettingsBloc, SettingsState>(
+          BlocBuilder<WeatherSettingsBloc, WeatherSettingsState>(
             builder: (context, state) {
               return _buildTemperatureUnitListTile(
                 context,
@@ -43,7 +43,7 @@ class SettingsPage extends StatelessWidget {
   }
 
   void _toggleTemperatureUnit(BuildContext context) {
-    BlocProvider.of<SettingsBloc>(context)
-        .add(SettingsEventTemperatureUnitsToggled());
+    BlocProvider.of<WeatherSettingsBloc>(context)
+        .add(WeatherSettingsEventTemperatureUnitsToggled());
   }
 }

@@ -30,8 +30,8 @@ void main() {
         BlocProvider<CounterBloc>(
           create: (_) => CounterBloc(),
         ),
-        BlocProvider<SettingsBloc>(
-          create: (_) => SettingsBloc(),
+        BlocProvider<WeatherSettingsBloc>(
+          create: (_) => WeatherSettingsBloc(),
         ),
         BlocProvider<WeatherThemeBloc>(
           create: (_) => WeatherThemeBloc(),
@@ -65,7 +65,7 @@ class MyApp extends StatelessWidget {
             CounterPage.routeName: (_) => CounterPage(),
             RandomWordsPage.routeName: (_) => RandomWordsPage(),
             BlogPostsPage.routeName: (_) => BlogPostsPage(),
-            SettingsPage.routeName: (_) => SettingsPage(),
+            WeatherSettingsPage.routeName: (_) => WeatherSettingsPage(),
             WeatherPage.routeName: (_) {
               // This bloc only exists as long as the page is displayed.
               return BlocProvider(

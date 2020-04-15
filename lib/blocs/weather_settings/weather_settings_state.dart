@@ -1,17 +1,17 @@
-part of 'settings_bloc.dart';
+part of 'weather_settings_bloc.dart';
 
 enum TemperatureUnits { f, c }
 
 @immutable
-class SettingsState extends Equatable {
+class WeatherSettingsState extends Equatable {
   final TemperatureUnits temperatureUnit;
 
-  const SettingsState({@required this.temperatureUnit})
+  const WeatherSettingsState({@required this.temperatureUnit})
       : assert(temperatureUnit != null);
 
   List<Object> get props => [temperatureUnit];
 
     @override
   String toString() =>
-      'SettingsState { temperatureUnit: $temperatureUnit }';
+      'WeatherSettingsState { temperatureUnit: $temperatureUnit }';
 }

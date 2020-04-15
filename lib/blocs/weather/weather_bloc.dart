@@ -21,17 +21,14 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
   @override
   Stream<WeatherState> mapEventToState(WeatherEvent event) async* {
     if (event is WeatherEventFetch) {
-      yield* _onFetch(event, state);
+      yield* _onFetch(event);
     }
     if (event is WeatherEventRefresh) {
-      yield* _onRefresh(event, state);
+      yield* _onRefresh(event);
     }
   }
 
-  Stream<WeatherState> _onFetch(
-    WeatherEventFetch event,
-    WeatherState state,
-  ) async* {
+  Stream<WeatherState> _onFetch(WeatherEventFetch event) async* {
     yield WeatherStateLoading();
     try {
       final Weather weather = await weatherRepository.getWeather(event.city);
@@ -41,10 +38,7 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
     }
   }
 
-  Stream<WeatherState> _onRefresh(
-    WeatherEventRefresh event,
-    WeatherState state,
-  ) async* {
+  Stream<WeatherState> _onRefresh(WeatherEventRefresh event) async* {
     yield WeatherStateLoading();
     try {
       final Weather weather = await weatherRepository.getWeather(event.city);

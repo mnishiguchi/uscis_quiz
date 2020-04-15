@@ -27,7 +27,7 @@ class CombinedWeatherInfo extends StatelessWidget {
             ),
             Padding(
               padding: EdgeInsets.all(20.0),
-              child: BlocBuilder<SettingsBloc, SettingsState>(
+              child: BlocBuilder<WeatherSettingsBloc, WeatherSettingsState>(
                 builder: (_, settingsState) {
                   return Temperature(
                     temperature: weather.temp,
