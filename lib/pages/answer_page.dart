@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:uscisquiz/blocs/blocs.dart';
+import 'package:uscisquiz/widgets/widgets.dart';
 
 class AnswerPageArgs {
   final int id;
@@ -27,18 +28,18 @@ class AnswerPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(currentQuestion.question),
+        title: Text('Question #${currentQuestion.id}'),
       ),
       body: ListView(
         children: <Widget>[
-          _buildQuestion(context, currentQuestion.question),
-          _buildAnswer(context, currentQuestion.answer),
+          _buildQuestion(currentQuestion.question),
+          _buildAnswerList(currentQuestion.answer),
         ],
       ),
     );
   }
 
-  Widget _buildQuestion(BuildContext context, String question) {
+  Widget _buildQuestion(String question) {
     return Container(
       padding: const EdgeInsets.only(
         top: 100.0,
@@ -57,26 +58,29 @@ class AnswerPage extends StatelessWidget {
     );
   }
 
-  Widget _buildAnswer(BuildContext context, List<String> answer) {
+  Widget _buildAnswerList(List<String> answer) {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 10.0),
-      child: Card(
-        child: Column(
-          children: answer
-              .map(
-                (answerEntry) => ListTile(
-                  title: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 10.0),
-                    child: Text(
-                      answerEntry,
-                      style: TextStyle(
-                        fontSize: 20,
-                      ),
-                    ),
-                  ),
-                ),
-              )
-              .toList(),
+      child: VisibilityToggle(
+        summary: Text("Answers"),
+        child: Card(
+          child: Column(
+            children: answer.map(_buildAnswerListTile).toList(),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildAnswerListTile(String answerEntry) {
+    return ListTile(
+      title: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 10.0),
+        child: Text(
+          answerEntry,
+          style: TextStyle(
+            fontSize: 20,
+          ),
         ),
       ),
     );

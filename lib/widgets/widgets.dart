@@ -6,4 +6,5 @@ export 'last_updated.dart';
 export 'location.dart';
 export 'my_drawer.dart';
 export 'temperature.dart';
+export 'visibility_toggle.dart';
 export 'weather_conditions.dart';
