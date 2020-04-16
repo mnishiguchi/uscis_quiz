@@ -13,24 +13,24 @@ class QuestionsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     print('[QuestionsPage] build');
 
-    return Scaffold(
-      drawer: MyDrawer(),
-      appBar: AppBar(
-        title: Text('Questions'),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.bookmark),
-            onPressed: () {
-              // TODO: Toggle bookmark filter.
-            },
-          )
-        ],
-      ),
-      body: BlocBuilder<UscisQuizBloc, UscisQuizState>(
-        builder: (_, uscisQuizState) {
-          return _buildContent(context, uscisQuizState);
-        },
-      ),
+    return BlocBuilder<UscisQuizBloc, UscisQuizState>(
+      builder: (_, state) {
+        return Scaffold(
+          drawer: MyDrawer(),
+          appBar: AppBar(
+            title: Text('Questions'),
+            actions: <Widget>[
+              IconButton(
+                icon: Icon(Icons.bookmark),
+                onPressed: () {
+                  // TODO: Toggle bookmark filter.
+                },
+              )
+            ],
+          ),
+          body: _buildContent(context, state),
+        );
+      },
     );
   }
 
@@ -42,7 +42,7 @@ class QuestionsPage extends StatelessWidget {
     }
 
     if (state is UscisQuizStateLoaded) {
-      return _buildQuestions(context, state.questions);
+      return _buildQuestions(context, state);
     }
 
     return Center(
@@ -50,10 +50,10 @@ class QuestionsPage extends StatelessWidget {
     );
   }
 
-  Widget _buildQuestions(
-    BuildContext context,
-    List<UscisQuizQuestion> questions,
-  ) {
+  Widget _buildQuestions(BuildContext context, UscisQuizStateLoaded state) {
+    final questions = state.questions;
+    final Set<int> bookmarkedIds = state.bookmarkedIds ?? Set<int>();
+
     return ListView.builder(
       padding: const EdgeInsets.all(16.0),
       itemBuilder: (context, i) {
@@ -62,8 +62,10 @@ class QuestionsPage extends StatelessWidget {
         // Find next suggestion index ignoring dividers.
         // 0,1,2,3,4,5, ... => 0,0,1,1,2,2,...
         final questionIndex = i ~/ 2;
+        final currentQuestion = questions[questionIndex];
+        final isBookmarked = bookmarkedIds.contains(currentQuestion.id);
 
-        return _buildRow(context, questions[questionIndex]);
+        return _buildRow(context, currentQuestion, isBookmarked);
       },
       itemCount: questions.length * 2,
     );
@@ -72,13 +74,19 @@ class QuestionsPage extends StatelessWidget {
   Widget _buildRow(
     BuildContext context,
     UscisQuizQuestion question,
+    bool isBookmarked,
   ) {
     return ListTile(
       title: Text(question.question),
-      trailing: Icon(
-        Icons.bookmark_border,
-        // TODO: Implement the bookmark functionality.
-        // question.isBookmarked ? Icons.bookmark : Icons.bookmark_border,
+      trailing: InkWell(
+        child: Icon(
+          isBookmarked ? Icons.bookmark : Icons.bookmark_border,
+        ),
+        onTap: () {
+          isBookmarked
+              ? _removeBookmark(context, question.id)
+              : _addBookmark(context, question.id);
+        },
       ),
       onTap: () {
         Navigator.pushNamed(
@@ -87,10 +95,18 @@ class QuestionsPage extends StatelessWidget {
           arguments: AnswerPageArgs(id: question.id),
         );
       },
-      onLongPress: () {
-        // TODO:: Toggle bookmark.
-        print('long pressed');
-      },
     );
+  }
+
+  void _addBookmark(BuildContext context, int id) {
+    context.bloc<UscisQuizBloc>().add(
+          UscisQuizEventAddBookmark(questionId: id),
+        );
+  }
+
+  void _removeBookmark(BuildContext context, int id) {
+    context.bloc<UscisQuizBloc>().add(
+          UscisQuizEventRemoveBookmark(questionId: id),
+        );
   }
 }

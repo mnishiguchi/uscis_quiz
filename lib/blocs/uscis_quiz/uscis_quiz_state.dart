@@ -8,27 +8,42 @@ abstract class UscisQuizState extends Equatable {
   List<Object> get props => [];
 }
 
+// Initial state.
 class UscisQuizStateUninitialized extends UscisQuizState {}
 
-class UscisQuizStateLoading extends UscisQuizState {}
-
-class UscisQuizStateLoaded extends UscisQuizState {
-  final List<UscisQuizQuestion> questions;
-
-  const UscisQuizStateLoaded({@required this.questions})
-      : assert(questions != null);
-
-  @override
-  List<Object> get props => [questions];
-
-  String toString() =>
-      'UscisQuizStateLoaded { questions: ${questions.length} }';
-}
-
+// Occurs when something went wrong.
 class UscisQuizStateError extends UscisQuizState {
   final dynamic error;
 
   const UscisQuizStateError({this.error});
 
   String toString() => 'UscisQuizStateError { error: ${error.toString()} }';
+}
+
+// Occurs once questions are loaded.
+class UscisQuizStateLoaded extends UscisQuizState {
+  final List<UscisQuizQuestion> questions;
+  final Set<int> bookmarkedIds;
+
+  const UscisQuizStateLoaded({
+    @required this.questions,
+    this.bookmarkedIds,
+  }) : assert(questions != null);
+
+  @override
+  List<Object> get props => [questions, bookmarkedIds];
+
+  String toString() =>
+      'UscisQuizStateLoaded { questions: ${questions.length}, bookmarkedIds: ${bookmarkedIds?.length} }';
+
+  // A utility that duplicates an instance with overrides.
+  UscisQuizStateLoaded copyWith({
+    List<UscisQuizQuestion> questions,
+    Set<int> bookmarkedIds,
+  }) {
+    return UscisQuizStateLoaded(
+      questions: questions ?? this.questions,
+      bookmarkedIds: bookmarkedIds ?? this.bookmarkedIds,
+    );
+  }
 }
