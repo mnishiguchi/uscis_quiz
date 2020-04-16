@@ -70,6 +70,7 @@ class MyApp extends StatelessWidget {
           initialRoute: QuestionsPage.routeName,
           routes: {
             QuestionsPage.routeName: (_) => QuestionsPage(),
+            AnswerPage.routeName: (_) => AnswerPage(),
             CounterPage.routeName: (_) => CounterPage(),
             RandomWordsPage.routeName: (_) => RandomWordsPage(),
             BlogPostsPage.routeName: (_) => BlogPostsPage(),

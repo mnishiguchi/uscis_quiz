@@ -25,15 +25,15 @@ class UscisQuizBloc extends Bloc<UscisQuizEvent, UscisQuizState> {
   }
 
   Stream<UscisQuizState> _onFetch(UscisQuizState state) async* {
-    // try {
+    try {
       if (state is UscisQuizStateUninitialized) {
         final List<UscisQuizQuestion> questions =
             await uscisQuizRepository.getUscisQuizQuestions();
         yield UscisQuizStateLoaded(questions: questions);
       }
-    // }
-    // catch (error) {
-    //   yield UscisQuizStateError(error: error);
-    // }
+    }
+    catch (error) {
+      yield UscisQuizStateError(error: error);
+    }
   }
 }

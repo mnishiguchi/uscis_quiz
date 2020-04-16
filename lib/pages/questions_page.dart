@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:uscisquiz/blocs/blocs.dart';
 import 'package:uscisquiz/models/models.dart';
+import 'package:uscisquiz/pages/pages.dart';
 import 'package:uscisquiz/widgets/widgets.dart';
 
 class QuestionsPage extends StatelessWidget {
@@ -15,7 +16,15 @@ class QuestionsPage extends StatelessWidget {
     return Scaffold(
       drawer: MyDrawer(),
       appBar: AppBar(
-        title: Text('QuestionsPage'),
+        title: Text('Questions'),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.bookmark),
+            onPressed: () {
+              // TODO: Toggle bookmark filter.
+            },
+          )
+        ],
       ),
       body: BlocBuilder<UscisQuizBloc, UscisQuizState>(
         builder: (_, uscisQuizState) {
@@ -54,13 +63,16 @@ class QuestionsPage extends StatelessWidget {
         // 0,1,2,3,4,5, ... => 0,0,1,1,2,2,...
         final questionIndex = i ~/ 2;
 
-        return _buildRow(questions[questionIndex]);
+        return _buildRow(context, questions[questionIndex]);
       },
       itemCount: questions.length * 2,
     );
   }
 
-  Widget _buildRow(UscisQuizQuestion question) {
+  Widget _buildRow(
+    BuildContext context,
+    UscisQuizQuestion question,
+  ) {
     return ListTile(
       title: Text(question.question),
       trailing: Icon(
@@ -69,10 +81,15 @@ class QuestionsPage extends StatelessWidget {
         // question.isBookmarked ? Icons.bookmark : Icons.bookmark_border,
       ),
       onTap: () {
-        // TODO: Implement navigation to an answer page.
+        Navigator.pushNamed(
+          context,
+          AnswerPage.routeName,
+          arguments: AnswerPageArgs(id: question.id),
+        );
       },
       onLongPress: () {
         // TODO:: Toggle bookmark.
+        print('long pressed');
       },
     );
   }
