@@ -40,12 +40,18 @@ class AnswerPage extends StatelessWidget {
 
   Widget _buildQuestion(BuildContext context, String question) {
     return Container(
-      padding: EdgeInsets.only(top: 100.0, left: 5.0, right: 5.0),
+      padding: const EdgeInsets.only(
+        top: 100.0,
+        right: 20.0,
+        bottom: 100.0,
+        left: 20.0,
+      ),
+      decoration: const BoxDecoration(color: Colors.blue),
       child: Text(
         question,
         style: TextStyle(
-          fontSize: 30,
-          fontWeight: FontWeight.bold,
+          fontSize: 24,
+          color: Colors.grey[100],
         ),
       ),
     );
@@ -53,22 +59,25 @@ class AnswerPage extends StatelessWidget {
 
   Widget _buildAnswer(BuildContext context, List<String> answer) {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 50.0),
-      child: ListView.builder(
-        itemBuilder: (context, index) {
-          return ListTile(
-            title: Text(
-              answer[index],
-              style: TextStyle(
-                fontSize: 24,
-                // fontWeight: FontWeight.w200,
-              ),
-            ),
-          );
-        },
-        itemCount: answer.length,
-        scrollDirection: Axis.vertical,
-        shrinkWrap: true,
+      padding: const EdgeInsets.symmetric(vertical: 10.0),
+      child: Card(
+        child: Column(
+          children: answer
+              .map(
+                (answerEntry) => ListTile(
+                  title: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 10.0),
+                    child: Text(
+                      answerEntry,
+                      style: TextStyle(
+                        fontSize: 20,
+                      ),
+                    ),
+                  ),
+                ),
+              )
+              .toList(),
+        ),
       ),
     );
   }
