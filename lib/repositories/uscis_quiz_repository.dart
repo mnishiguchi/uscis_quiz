@@ -9,13 +9,9 @@ class UscisQuizRepository {
 
   Future<List<UscisQuizQuestion>> getUscisQuizQuestions() async {
     final String jsonString = await _loadAsset();
-    final List<dynamic> parsedJson = await json.decode(jsonString);
-
-    try {
-      return parsedJson.map(UscisQuizQuestion.fromJson).toList();
-    } catch (error) {
-      throw Exception('Error parsing questions json: $error');
-    }
+    // https://dart.dev/guides/language/sound-problems#invalid-casts
+    final List<Map> parsedJson = await json.decode(jsonString).cast<Map>();
+    return UscisQuizQuestion.fromJsonList(parsedJson);
   }
 
   Future<String> _loadAsset() async {

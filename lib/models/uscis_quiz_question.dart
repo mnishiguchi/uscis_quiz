@@ -3,8 +3,7 @@ import 'package:equatable/equatable.dart';
 class UscisQuizQuestion extends Equatable {
   final int id;
   final String question;
-  // The data type is List<dynamic> because of the persed json's data type.
-  final List<dynamic> answer;
+  final List<String> answer;
 
   UscisQuizQuestion({
     this.id,
@@ -18,12 +17,19 @@ class UscisQuizQuestion extends Equatable {
   @override
   String toString() => 'UscisQuizQuestion { id: $id }';
 
+  static List<UscisQuizQuestion> fromJsonList(List<Map> jsonList) {
+    return jsonList.map(UscisQuizQuestion.fromJson).toList();
+  }
+
   // Creates an instance from the API response JSON.
-  static UscisQuizQuestion fromJson(dynamic json) {
+  static UscisQuizQuestion fromJson(Map jsonObject) {
     return UscisQuizQuestion(
-      id: json['id'] as int,
-      question: json['question'],
-      answer: json['answer'],
+      id: jsonObject['id'] as int,
+      question: jsonObject['question'] as String,
+      // Create a new instance because type 'List<dynamic>' is not a subtype of
+      // type 'List<String>'.
+      // https://dart.dev/guides/language/sound-problems#invalid-casts
+      answer: (jsonObject['answer'] as List).cast<String>(),
     );
   }
 }

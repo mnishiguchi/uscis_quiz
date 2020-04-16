@@ -51,7 +51,7 @@ class AnswerPage extends StatelessWidget {
     );
   }
 
-  Widget _buildAnswer(BuildContext context, List<dynamic> answer) {
+  Widget _buildAnswer(BuildContext context, List<String> answer) {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 50.0),
       child: ListView.builder(
