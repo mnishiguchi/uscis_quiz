@@ -4,8 +4,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:uscisquiz/blocs/blocs.dart';
 import 'package:uscisquiz/widgets/widgets.dart';
 
+// The default questions page.
 class QuestionsPage extends StatelessWidget {
   static const routeName = '/questions';
+
+  String pageTitle() => 'All Questions';
 
   @override
   Widget build(BuildContext context) {
@@ -16,23 +19,16 @@ class QuestionsPage extends StatelessWidget {
         return Scaffold(
           drawer: MyDrawer(),
           appBar: AppBar(
-            title: Text('Questions'),
-            actions: <Widget>[
-              IconButton(
-                icon: Icon(Icons.bookmark),
-                onPressed: () {
-                  // TODO: Toggle bookmark filter.
-                },
-              )
-            ],
+            title: Text(pageTitle()),
+            actions: <Widget>[],
           ),
-          body: _buildContent(context, state),
+          body: buildContent(context, state),
         );
       },
     );
   }
 
-  Widget _buildContent(BuildContext context, UscisQuizState state) {
+  Widget buildContent(BuildContext context, UscisQuizState state) {
     if (state is UscisQuizStateUninitialized) {
       return Center(
         child: CircularProgressIndicator(),
@@ -40,7 +36,7 @@ class QuestionsPage extends StatelessWidget {
     }
 
     if (state is UscisQuizStateLoaded) {
-      return _buildQuestions(context, state);
+      return buildQuestions(context, state);
     }
 
     return Center(
@@ -48,7 +44,7 @@ class QuestionsPage extends StatelessWidget {
     );
   }
 
-  Widget _buildQuestions(BuildContext context, UscisQuizStateLoaded state) {
+  Widget buildQuestions(BuildContext context, UscisQuizStateLoaded state) {
     final questions = state.questions;
     final Set<int> bookmarkedIds = state.bookmarkedIds ?? Set<int>();
 
