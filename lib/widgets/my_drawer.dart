@@ -12,48 +12,13 @@ class MyDrawer extends StatelessWidget {
         children: <Widget>[
           AppBar(
             automaticallyImplyLeading: false,
-            title: Text('Choose'),
-          ),
-          ListTile(
-            leading: Icon(Icons.home),
-            title: Text('Home'),
-            onTap: () {
-              Navigator.pushReplacementNamed(context, HomePage.routeName);
-            },
+            title: Text('USCIS Quiz'),
           ),
           ListTile(
             leading: Icon(Icons.question_answer),
-            title: Text('Questions'),
+            title: Text('All Questions'),
             onTap: () {
-              Navigator.popAndPushNamed(context, QuestionsPage.routeName);
-            },
-          ),
-          ListTile(
-            leading: Icon(Icons.watch),
-            title: Text('Counter'),
-            onTap: () {
-              Navigator.popAndPushNamed(context, CounterPage.routeName);
-            },
-          ),
-          ListTile(
-            leading: Icon(Icons.book),
-            title: Text('RandomWords'),
-            onTap: () {
-              Navigator.popAndPushNamed(context, RandomWordsPage.routeName);
-            },
-          ),
-          ListTile(
-            leading: Icon(Icons.list),
-            title: Text('BlogPosts'),
-            onTap: () {
-              Navigator.popAndPushNamed(context, BlogPostsPage.routeName);
-            },
-          ),
-          ListTile(
-            leading: Icon(Icons.wb_sunny),
-            title: Text('Weather'),
-            onTap: () {
-              Navigator.popAndPushNamed(context, WeatherPage.routeName);
+              Navigator.pushReplacementNamed(context, QuestionsPage.routeName);
             },
           ),
         ],
