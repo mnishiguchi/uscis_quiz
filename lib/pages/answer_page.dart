@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_linkify/flutter_linkify.dart' show Linkify;
+import 'package:url_launcher/url_launcher.dart' show canLaunch, launch;
 
 import 'package:uscisquiz/blocs/blocs.dart';
 import 'package:uscisquiz/widgets/widgets.dart';
@@ -76,11 +78,18 @@ class AnswerPage extends StatelessWidget {
     return ListTile(
       title: Padding(
         padding: const EdgeInsets.symmetric(vertical: 10.0),
-        child: Text(
-          answerEntry,
+        child: Linkify(
+          text: answerEntry,
           style: TextStyle(
             fontSize: 20,
           ),
+          onOpen: (link) async {
+            if (await canLaunch(link.url)) {
+              await launch(link.url);
+            } else {
+              throw 'Could not launch $link';
+            }
+          },
         ),
       ),
     );

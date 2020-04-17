@@ -150,7 +150,7 @@
     "id": 20,
     "question": "Who is one of your state’s U.S. Senators now?* ",
     "answer": [
-      "Answers will vary. [District of Columbia residents and residents of U.S. territories should answer that D.C. (or the territory where the applicant lives) has no U.S. Senators.]Visit senate.gov to find your state’s U.S. Senators."
+      "Answers will vary. [District of Columbia residents and residents of U.S. territories should answer that D.C. (or the territory where the applicant lives) has no U.S. Senators.] Visit https://www.senate.gov/ to find your state’s U.S. Senators."
     ],
     "audio_link": "https://www.uscis.gov/sites/default/files/files/nativedocuments/Track%2020.mp3"
   },
@@ -170,7 +170,7 @@
     "id": 23,
     "question": "Name your U.S. Representative. ",
     "answer": [
-      "Answers will vary. [Residents of territories with nonvoting Delegates or Resident Commissioners may provide the name of that Delegate or Commissioner. Also acceptable is any statement that the territory has no (voting) Representatives in Congress.]Visit house.gov to find your U.S. Representative."
+      "Answers will vary. [Residents of territories with nonvoting Delegates or Resident Commissioners may provide the name of that Delegate or Commissioner. Also acceptable is any statement that the territory has no (voting) Representatives in Congress.] Visit https://www.house.gov/ to find your U.S. Representative."
     ],
     "audio_link": "https://www.uscis.gov/sites/default/files/files/nativedocuments/Track%2023.mp3"
   },
@@ -342,7 +342,7 @@
     "id": 43,
     "question": "Who is the Governor of your state now? ",
     "answer": [
-      "Answers will vary. [District of Columbia residents should answer that D.C. does not have a Governor.] Visit usa.gov/states-and-territories to find the Governor of your state."
+      "Answers will vary. [District of Columbia residents should answer that D.C. does not have a Governor.] Visit https://www.usa.gov/states-and-territories to find the Governor of your state."
     ],
     "audio_link": "https://www.uscis.gov/sites/default/files/files/nativedocuments/Track%2043.mp3"
   },
