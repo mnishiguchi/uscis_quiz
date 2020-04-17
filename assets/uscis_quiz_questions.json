@@ -148,9 +148,9 @@
   },
   {
     "id": 20,
-    "question": "Who is one of your state’s U.S. Senators now?*",
+    "question": "Who is one of your state’s U.S. Senators now?* ",
     "answer": [
-      "Answers will vary. [District of Columbia residents and residents of U.S. territories should answer that D.C. (or the territory where the applicant lives) has no U.S. Senators.]"
+      "Answers will vary. [District of Columbia residents and residents of U.S. territories should answer that D.C. (or the territory where the applicant lives) has no U.S. Senators.]Visit senate.gov to find your state’s U.S. Senators."
     ],
     "audio_link": "https://www.uscis.gov/sites/default/files/files/nativedocuments/Track%2020.mp3"
   },
@@ -168,9 +168,9 @@
   },
   {
     "id": 23,
-    "question": "Name your U.S. Representative.",
+    "question": "Name your U.S. Representative. ",
     "answer": [
-      "Answers will vary. [Residents of territories with nonvoting Delegates or Resident Commissioners may provide the name of that Delegate or Commissioner. Also acceptable is any statement that the territory has no (voting) Representatives in Congress.]"
+      "Answers will vary. [Residents of territories with nonvoting Delegates or Resident Commissioners may provide the name of that Delegate or Commissioner. Also acceptable is any statement that the territory has no (voting) Representatives in Congress.]Visit house.gov to find your U.S. Representative."
     ],
     "audio_link": "https://www.uscis.gov/sites/default/files/files/nativedocuments/Track%2023.mp3"
   },
@@ -206,15 +206,19 @@
     "id": 28,
     "question": "What is the name of the President of the United States now?*",
     "answer": [
-      "Visit uscis.gov/citizenship/testupdates for the name of the President of the United States."
+      "Donald J. Trump ",
+      "Donald Trump ",
+      "Trump "
     ],
     "audio_link": "https://www.uscis.gov/sites/default/files/files/nativedocuments/Track_28.mp3"
   },
   {
     "id": 29,
-    "question": "What is the name of the Vice President of the United States now?",
+    "question": "What is the name of the Vice President of the United States now? ",
     "answer": [
-      "Visit uscis.gov/citizenship/testupdates for the name of the Vice President of the United States."
+      "Michael R. Pence",
+      "Mike Pence",
+      "Pence"
     ],
     "audio_link": "https://www.uscis.gov/sites/default/files/files/nativedocuments/Track_29.mp3"
   },
@@ -298,7 +302,7 @@
     "id": 39,
     "question": "How many justices are on the Supreme Court?",
     "answer": [
-      "Visit uscis.gov/citizenship/testupdates for the number of justices on the Supreme Court."
+      "nine (9) "
     ],
     "audio_link": "https://www.uscis.gov/sites/default/files/files/nativedocuments/Track_39.mp3"
   },
@@ -306,7 +310,8 @@
     "id": 40,
     "question": "Who is the Chief Justice of the United States now?",
     "answer": [
-      "Visit uscis.gov/citizenship/testupdates for the name of the Chief Justice of the United States."
+      "John Roberts ",
+      "John G. Roberts, Jr."
     ],
     "audio_link": "https://www.uscis.gov/sites/default/files/files/nativedocuments/Track_40.mp3"
   },
@@ -335,9 +340,9 @@
   },
   {
     "id": 43,
-    "question": "Who is the Governor of your state now?",
+    "question": "Who is the Governor of your state now? ",
     "answer": [
-      "Answers will vary. [District of Columbia residents should answer that D.C. does not have a Governor.]"
+      "Answers will vary. [District of Columbia residents should answer that D.C. does not have a Governor.] Visit usa.gov/states-and-territories to find the Governor of your state."
     ],
     "audio_link": "https://www.uscis.gov/sites/default/files/files/nativedocuments/Track%2043.mp3"
   },
@@ -359,15 +364,16 @@
     "id": 46,
     "question": "What is the political party of the President now?",
     "answer": [
-      "Visit uscis.gov/citizenship/testupdates for the political party of the President."
+      "Republican (Party) "
     ],
     "audio_link": "https://www.uscis.gov/sites/default/files/files/nativedocuments/Track_46.mp3"
   },
   {
     "id": 47,
-    "question": "What is the name of the Speaker of the House of Representatives now?",
+    "question": "What is the name of the Speaker of the House of Representatives now? ",
     "answer": [
-      "Visit uscis.gov/citizenship/testupdates for the name of the Speaker of the House of Representatives."
+      "Nancy Pelosi",
+      "Pelosi "
     ],
     "audio_link": "https://www.uscis.gov/sites/default/files/files/nativedocuments/Track_47.mp3"
   },

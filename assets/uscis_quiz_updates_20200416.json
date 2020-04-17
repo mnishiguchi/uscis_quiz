@@ -1,0 +1,71 @@
+[
+  {
+    "id": 20,
+    "question": "Who is one of your state’s U.S. Senators now?* ",
+    "answer": [
+      "Answers will vary. [District of Columbia residents and residents of U.S. territories should answer that D.C. (or the territory where the applicant lives) has no U.S. Senators.]Visit senate.gov to find your state’s U.S. Senators."
+    ]
+  },
+  {
+    "id": 23,
+    "question": "Name your U.S. Representative. ",
+    "answer": [
+      "Answers will vary. [Residents of territories with nonvoting Delegates or Resident Commissioners may provide the name of that Delegate or Commissioner. Also acceptable is any statement that the territory has no (voting) Representatives in Congress.]Visit house.gov to find your U.S. Representative."
+    ]
+  },
+  {
+    "id": 28,
+    "question": "What is the name of the President of the United States now?*",
+    "answer": [
+      "Donald J. Trump ",
+      "Donald Trump ",
+      "Trump "
+    ]
+  },
+  {
+    "id": 29,
+    "question": "What is the name of the Vice President of the United States now? ",
+    "answer": [
+      "Michael R. Pence",
+      "Mike Pence",
+      "Pence"
+    ]
+  },
+  {
+    "id": 39,
+    "question": "How many justices are on the Supreme Court?",
+    "answer": [
+      "nine (9) "
+    ]
+  },
+  {
+    "id": 40,
+    "question": "Who is the Chief Justice of the United States now?",
+    "answer": [
+      "John Roberts ",
+      "John G. Roberts, Jr."
+    ]
+  },
+  {
+    "id": 43,
+    "question": "Who is the Governor of your state now? ",
+    "answer": [
+      "Answers will vary. [District of Columbia residents should answer that D.C. does not have a Governor.] Visit usa.gov/states-and-territories to find the Governor of your state."
+    ]
+  },
+  {
+    "id": 46,
+    "question": "What is the political party of the President now?",
+    "answer": [
+      "Republican (Party) "
+    ]
+  },
+  {
+    "id": 47,
+    "question": "What is the name of the Speaker of the House of Representatives now? ",
+    "answer": [
+      "Nancy Pelosi",
+      "Pelosi "
+    ]
+  }
+]
