@@ -20,6 +20,13 @@ class BookmarkedQuestionsPage extends QuestionsPage {
     return QuestionList(
       questions: questions,
       bookmarkedIds: bookmarkedIds,
+      onItemTap: (int questionId) {
+        Navigator.pushNamed(
+          context,
+          BookmarkedQuestionPage.routeName,
+          arguments: BookmarkedQuestionPageArgs(id: questionId),
+        );
+      },
     );
   }
 }

@@ -7,7 +7,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('[HomePage] build');
+    print('[$runtimeType] build');
 
     return Scaffold(
       drawer: MyDrawer(),

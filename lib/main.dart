@@ -43,6 +43,7 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: QuestionsPage.routeName,
       routes: {
+        BookmarkedQuestionPage.routeName: (_) => BookmarkedQuestionPage(),
         BookmarkedQuestionsPage.routeName: (_) => BookmarkedQuestionsPage(),
         QuestionsPage.routeName: (_) => QuestionsPage(),
         QuestionPage.routeName: (_) => QuestionPage(),

@@ -9,13 +9,16 @@ import 'package:uscisquiz/pages/pages.dart';
 class QuestionList extends StatelessWidget {
   final List<UscisQuizQuestion> questions;
   final Set<int> bookmarkedIds;
+  final Function onItemTap;
 
   QuestionList({
     Key key,
     @required this.questions,
     @required this.bookmarkedIds,
+    @required this.onItemTap,
   })  : assert(questions != null),
         assert(bookmarkedIds != null),
+        assert(onItemTap != null),
         super(key: key);
 
   @override
@@ -54,13 +57,7 @@ class QuestionList extends StatelessWidget {
               : _addBookmark(context, question.id);
         },
       ),
-      onTap: () {
-        Navigator.pushNamed(
-          context,
-          QuestionPage.routeName,
-          arguments: QuestionPageArgs(id: question.id),
-        );
-      },
+      onTap: () => onItemTap(question.id),
     );
   }
 

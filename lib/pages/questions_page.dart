@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:uscisquiz/blocs/blocs.dart';
+import 'package:uscisquiz/pages/pages.dart';
 import 'package:uscisquiz/widgets/widgets.dart';
 
 // The default questions page.
@@ -12,7 +13,7 @@ class QuestionsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('[QuestionsPage] build');
+    print('[$runtimeType] build');
 
     return BlocBuilder<UscisQuizBloc, UscisQuizState>(
       builder: (_, state) {
@@ -22,13 +23,13 @@ class QuestionsPage extends StatelessWidget {
             title: Text(pageTitle()),
             actions: <Widget>[],
           ),
-          body: buildContent(context, state),
+          body: buildBody(context, state),
         );
       },
     );
   }
 
-  Widget buildContent(BuildContext context, UscisQuizState state) {
+  Widget buildBody(BuildContext context, UscisQuizState state) {
     if (state is UscisQuizStateUninitialized) {
       return Center(
         child: CircularProgressIndicator(),
@@ -51,6 +52,13 @@ class QuestionsPage extends StatelessWidget {
     return QuestionList(
       questions: questions,
       bookmarkedIds: bookmarkedIds,
+      onItemTap: (int questionId) {
+        Navigator.pushNamed(
+          context,
+          QuestionPage.routeName,
+          arguments: QuestionPageArgs(id: questionId),
+        );
+      },
     );
   }
 }
