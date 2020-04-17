@@ -12,12 +12,8 @@ class BookmarkedQuestionsPage extends QuestionsPage {
 
   @override
   Widget buildQuestions(BuildContext context, UscisQuizStateLoaded state) {
-    final questions = state.questions
-        .where((question) => state.isBookmarked(question.id))
-        .toList();
-
     return QuestionList(
-      questions: questions,
+      questions: state.getBookmarkedQuestions(),
       onItemTap: (int questionId) {
         Navigator.pushNamed(
           context,
