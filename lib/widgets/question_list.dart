@@ -57,8 +57,8 @@ class QuestionList extends StatelessWidget {
       onTap: () {
         Navigator.pushNamed(
           context,
-          AnswerPage.routeName,
-          arguments: AnswerPageArgs(id: question.id),
+          QuestionPage.routeName,
+          arguments: QuestionPageArgs(id: question.id),
         );
       },
     );

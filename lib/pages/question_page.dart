@@ -6,21 +6,21 @@ import 'package:url_launcher/url_launcher.dart' show canLaunch, launch;
 import 'package:uscisquiz/blocs/blocs.dart';
 import 'package:uscisquiz/widgets/widgets.dart';
 
-class AnswerPageArgs {
+class QuestionPageArgs {
   final int id;
 
-  AnswerPageArgs({@required this.id});
+  QuestionPageArgs({@required this.id});
 }
 
-class AnswerPage extends StatelessWidget {
-  static const routeName = '/questions/:id/answer';
+class QuestionPage extends StatelessWidget {
+  static const routeName = '/questions/:id';
 
   @override
   Widget build(BuildContext context) {
-    print('[AnswerPage] build');
+    print('[QuestionPage] build');
 
-    final AnswerPageArgs args = ModalRoute.of(context).settings.arguments;
-    assert(args != null, "AnswerPageArgs is required");
+    final QuestionPageArgs args = ModalRoute.of(context).settings.arguments;
+    assert(args != null, "QuestionPageArgs is required");
     final id = args.id;
 
     // Assumption: Questions have already been loaded.
