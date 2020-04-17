@@ -41,26 +41,52 @@ class QuestionPage extends StatelessWidget {
 
     final questions = findQuestions(context);
     final indexLookup = _findIndices(questions, args.id);
+
+    // When an item is unbookmarked, the current item will be nonexistent.
+    if (indexLookup['current'].isNegative) {
+      return Container();
+    }
+
     final currentQuestion = questions[indexLookup['current']];
     final previousQuestion = questions[indexLookup['previous']];
     final nextQuestion = questions[indexLookup['next']];
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Question #${currentQuestion.id}'),
-      ),
-      body: ListView(
-        children: <Widget>[
-          _buildQuestion(currentQuestion.question),
-          _buildAnswerList(currentQuestion.answer),
-        ],
-      ),
-      bottomNavigationBar: _buildBottomNavigationBar(
-        context,
-        questions,
-        previousQuestion.id,
-        nextQuestion.id,
-      ),
+    print('[$runtimeType] $indexLookup');
+
+    return BlocBuilder<UscisQuizBloc, UscisQuizState>(
+      builder: (context, state) {
+        final bookmarkedIds = (state as UscisQuizStateLoaded).bookmarkedIds;
+        final isBookmarked = bookmarkedIds.contains(args.id);
+
+        return Scaffold(
+          appBar: AppBar(
+            title: Text('Question #${currentQuestion.id}'),
+            actions: <Widget>[
+              IconButton(
+                icon:
+                    Icon(isBookmarked ? Icons.bookmark : Icons.bookmark_border),
+                onPressed: () async {
+                  isBookmarked
+                      ? _removeBookmark(context, currentQuestion.id)
+                      : _addBookmark(context, currentQuestion.id);
+                },
+              ),
+            ],
+          ),
+          body: ListView(
+            children: <Widget>[
+              _buildQuestion(currentQuestion.question),
+              _buildAnswerList(currentQuestion.answer),
+            ],
+          ),
+          bottomNavigationBar: _buildBottomNavigationBar(
+            context,
+            questions,
+            previousQuestion.id,
+            nextQuestion.id,
+          ),
+        );
+      },
     );
   }
 
@@ -156,10 +182,28 @@ class QuestionPage extends StatelessWidget {
         questions.length > 1 ? (current == 0 ? last : current - 1) : current;
     final next =
         questions.length > 1 ? (current == last ? 0 : current + 1) : current;
-    return Map()
-      ..['last'] = last
-      ..['current'] = current
-      ..['previous'] = previous
-      ..['next'] = next;
+
+    // When an item is unbookmarked, the current item will be nonexistent.
+    return current >= 0
+        ? (Map()
+          ..['previous'] = previous
+          ..['current'] = current
+          ..['next'] = next)
+        : (Map()
+          ..['previous'] = -1
+          ..['current'] = -1
+          ..['next'] = -1);
+  }
+
+  void _addBookmark(BuildContext context, int id) {
+    context
+        .bloc<UscisQuizBloc>()
+        .add(UscisQuizEventAddBookmark(questionId: id));
+  }
+
+  void _removeBookmark(BuildContext context, int id) {
+    context
+        .bloc<UscisQuizBloc>()
+        .add(UscisQuizEventRemoveBookmark(questionId: id));
   }
 }
