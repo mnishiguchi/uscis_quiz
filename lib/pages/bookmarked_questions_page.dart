@@ -12,14 +12,12 @@ class BookmarkedQuestionsPage extends QuestionsPage {
 
   @override
   Widget buildQuestions(BuildContext context, UscisQuizStateLoaded state) {
-    final Set<int> bookmarkedIds = state.bookmarkedIds ?? Set<int>();
     final questions = state.questions
-        .where((question) => bookmarkedIds.contains(question.id))
+        .where((question) => state.isBookmarked(question.id))
         .toList();
 
     return QuestionList(
       questions: questions,
-      bookmarkedIds: bookmarkedIds,
       onItemTap: (int questionId) {
         Navigator.pushNamed(
           context,

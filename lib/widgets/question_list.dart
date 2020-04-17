@@ -3,21 +3,17 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:uscisquiz/blocs/blocs.dart';
 import 'package:uscisquiz/models/models.dart';
-import 'package:uscisquiz/pages/pages.dart';
 
 // A list view of UscisQuizQuestions. Requires UscisQuizBloc through context.
 class QuestionList extends StatelessWidget {
   final List<UscisQuizQuestion> questions;
-  final Set<int> bookmarkedIds;
   final Function onItemTap;
 
   QuestionList({
     Key key,
     @required this.questions,
-    @required this.bookmarkedIds,
     @required this.onItemTap,
   })  : assert(questions != null),
-        assert(bookmarkedIds != null),
         assert(onItemTap != null),
         super(key: key);
 
@@ -32,7 +28,7 @@ class QuestionList extends StatelessWidget {
         // 0,1,2,3,4,5, ... => 0,0,1,1,2,2,...
         final questionIndex = i ~/ 2;
         final currentQuestion = questions[questionIndex];
-        final isBookmarked = bookmarkedIds.contains(currentQuestion.id);
+        final isBookmarked = _isBookmarked(context, currentQuestion.id);
 
         return _buildRow(context, currentQuestion, isBookmarked);
       },
@@ -72,4 +68,8 @@ class QuestionList extends StatelessWidget {
         .bloc<UscisQuizBloc>()
         .add(UscisQuizEventRemoveBookmark(questionId: id));
   }
+
+  bool _isBookmarked(BuildContext context, int id) =>
+      (context.bloc<UscisQuizBloc>().state as UscisQuizStateLoaded)
+          .isBookmarked(id);
 }

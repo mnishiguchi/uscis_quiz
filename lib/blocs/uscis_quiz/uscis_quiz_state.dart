@@ -47,4 +47,6 @@ class UscisQuizStateLoaded extends UscisQuizState {
       bookmarkedIds: bookmarkedIds ?? this.bookmarkedIds,
     );
   }
+
+  bool isBookmarked(int questionId) => bookmarkedIds.contains(questionId);
 }

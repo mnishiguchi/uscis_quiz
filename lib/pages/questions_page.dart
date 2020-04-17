@@ -46,12 +46,8 @@ class QuestionsPage extends StatelessWidget {
   }
 
   Widget buildQuestions(BuildContext context, UscisQuizStateLoaded state) {
-    final questions = state.questions;
-    final Set<int> bookmarkedIds = state.bookmarkedIds ?? Set<int>();
-
     return QuestionList(
-      questions: questions,
-      bookmarkedIds: bookmarkedIds,
+      questions: state.questions,
       onItemTap: (int questionId) {
         Navigator.pushNamed(
           context,

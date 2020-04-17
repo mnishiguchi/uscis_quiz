@@ -55,8 +55,7 @@ class QuestionPage extends StatelessWidget {
 
     return BlocBuilder<UscisQuizBloc, UscisQuizState>(
       builder: (context, state) {
-        final bookmarkedIds = (state as UscisQuizStateLoaded).bookmarkedIds;
-        final isBookmarked = bookmarkedIds.contains(args.id);
+        final isBookmarked = (state as UscisQuizStateLoaded).isBookmarked(args.id);
 
         return Scaffold(
           appBar: AppBar(
