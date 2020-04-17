@@ -62,14 +62,14 @@ class QuestionList extends StatelessWidget {
   }
 
   void _addBookmark(BuildContext context, int id) {
-    context.bloc<UscisQuizBloc>().add(
-          UscisQuizEventAddBookmark(questionId: id),
-        );
+    context
+        .bloc<UscisQuizBloc>()
+        .add(UscisQuizEventAddBookmark(questionId: id));
   }
 
   void _removeBookmark(BuildContext context, int id) {
-    context.bloc<UscisQuizBloc>().add(
-          UscisQuizEventRemoveBookmark(questionId: id),
-        );
+    context
+        .bloc<UscisQuizBloc>()
+        .add(UscisQuizEventRemoveBookmark(questionId: id));
   }
 }

@@ -27,8 +27,9 @@ class UscisQuizStateLoaded extends UscisQuizState {
 
   const UscisQuizStateLoaded({
     @required this.questions,
-    this.bookmarkedIds,
-  }) : assert(questions != null);
+    @required this.bookmarkedIds,
+  })  : assert(questions != null),
+        assert(bookmarkedIds != null);
 
   @override
   List<Object> get props => [questions, bookmarkedIds];

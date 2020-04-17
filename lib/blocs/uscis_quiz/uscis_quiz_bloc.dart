@@ -38,25 +38,30 @@ class UscisQuizBloc extends Bloc<UscisQuizEvent, UscisQuizState> {
   Stream<UscisQuizState> _onFetchQuestions() async* {
     final List<UscisQuizQuestion> questions =
         await uscisQuizRepository.getUscisQuizQuestions();
-    yield UscisQuizStateLoaded(questions: questions);
+    final Set<int> bookmarkedIds = await uscisQuizRepository.getBookmarkedIds();
+    yield UscisQuizStateLoaded(
+      questions: questions,
+      bookmarkedIds: bookmarkedIds,
+    );
   }
 
   Stream<UscisQuizState> _onBookmarkAdded(
     UscisQuizStateLoaded state,
     int questionId,
   ) async* {
-    yield state.copyWith(
-      bookmarkedIds: _createBookmarkIdsFromState(state)..add(questionId),
-    );
+    final bookmarkedIds = _createBookmarkIdsFromState(state)..add(questionId);
+    uscisQuizRepository.setBookmarkedIds(bookmarkedIds);
+    yield state.copyWith(bookmarkedIds: bookmarkedIds);
   }
 
   Stream<UscisQuizState> _onBookmarkRemoved(
     UscisQuizStateLoaded state,
     int questionId,
   ) async* {
-    yield state.copyWith(
-      bookmarkedIds: _createBookmarkIdsFromState(state)..remove(questionId),
-    );
+    final bookmarkedIds = _createBookmarkIdsFromState(state)
+      ..remove(questionId);
+    uscisQuizRepository.setBookmarkedIds(bookmarkedIds);
+    yield state.copyWith(bookmarkedIds: bookmarkedIds);
   }
 
   // Create a new instance so that the bloc will trigger the transition.
