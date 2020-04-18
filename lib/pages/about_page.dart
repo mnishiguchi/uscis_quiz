@@ -28,6 +28,8 @@ class AboutPage extends StatelessWidget {
                     onOpen: (link) async {
                       if (await canLaunch(link.url)) await launch(link.url);
                     },
+                    // https://api.flutter.dev/flutter/material/TextTheme-class.html
+                    style: Theme.of(context).textTheme.headline,
                   ),
                 ),
               ),

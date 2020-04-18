@@ -63,6 +63,7 @@ class QuestionPage extends StatelessWidget {
             title: Text('Question #${currentQuestion.id}'),
             actions: <Widget>[
               IconButton(
+                color: Colors.grey[100],
                 icon:
                     Icon(isBookmarked ? Icons.bookmark : Icons.bookmark_border),
                 onPressed: () async {
@@ -75,8 +76,8 @@ class QuestionPage extends StatelessWidget {
           ),
           body: ListView(
             children: <Widget>[
-              _buildQuestion(currentQuestion.question),
-              _buildAnswerList(currentQuestion.answer),
+              _buildQuestion(context, currentQuestion.question),
+              _buildAnswerList(context, currentQuestion.answer),
             ],
           ),
           bottomNavigationBar: _buildBottomNavigationBar(
@@ -90,48 +91,53 @@ class QuestionPage extends StatelessWidget {
     );
   }
 
-  Widget _buildQuestion(String question) {
+  Widget _buildQuestion(BuildContext context, String question) {
+    final Color backgroundColor = Theme.of(context).primaryColorDark;
     return Container(
       padding: const EdgeInsets.only(
-        top: 100.0,
+        top: 80.0,
         right: 20.0,
-        bottom: 100.0,
+        bottom: 80.0,
         left: 20.0,
       ),
-      decoration: const BoxDecoration(color: Colors.blue),
+      decoration: BoxDecoration(
+        color: backgroundColor,
+      ),
       child: Text(
         question,
-        style: TextStyle(
-          fontSize: 24,
-          color: Colors.grey[100],
-        ),
+        style: Theme.of(context).textTheme.headline.copyWith(
+              color: Colors.grey[100],
+            ),
       ),
     );
   }
 
-  Widget _buildAnswerList(List<String> answer) {
+  Widget _buildAnswerList(BuildContext context, List<String> answerList) {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 10.0),
       child: VisibilityToggle(
         summary: Text("Answers"),
         child: Card(
           child: Column(
-            children: answer.map(_buildAnswerListTile).toList(),
+            children: answerList
+                .map((answerEntry) => _buildAnswerListTile(
+                      context,
+                      answerEntry,
+                    ))
+                .toList(),
           ),
         ),
       ),
     );
   }
 
-  Widget _buildAnswerListTile(String answerEntry) {
+  Widget _buildAnswerListTile(BuildContext context, String answerEntry) {
     return ListTile(
       title: Padding(
         padding: const EdgeInsets.symmetric(vertical: 10.0),
         child: Linkify(
           text: answerEntry,
-          style: TextStyle(
-            fontSize: 20,
-          ),
+          style: Theme.of(context).textTheme.body1.copyWith(fontSize: 20.0),
           onOpen: (link) async {
             if (await canLaunch(link.url)) await launch(link.url);
           },

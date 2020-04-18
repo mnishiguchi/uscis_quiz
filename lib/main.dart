@@ -38,8 +38,7 @@ class MyApp extends StatelessWidget {
       // debugShowMaterialGrid: true,
       title: 'USCIS Quiz',
       theme: ThemeData(
-        primarySwatch: Colors.green,
-        primaryColor: Colors.grey[100],
+        primarySwatch: Colors.indigo,
       ),
       initialRoute: QuestionsPage.routeName,
       routes: {
