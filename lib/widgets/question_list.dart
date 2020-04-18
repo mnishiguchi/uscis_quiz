@@ -19,6 +19,12 @@ class QuestionList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (questions.length == 0) {
+      return Center(
+        child: Text('No item found'),
+      );
+    }
+
     return ListView.builder(
       padding: const EdgeInsets.all(16.0),
       itemBuilder: (context, i) {
