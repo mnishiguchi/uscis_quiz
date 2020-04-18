@@ -55,7 +55,8 @@ class QuestionPage extends StatelessWidget {
 
     return BlocBuilder<UscisQuizBloc, UscisQuizState>(
       builder: (context, state) {
-        final isBookmarked = (state as UscisQuizStateLoaded).isBookmarked(args.id);
+        final isBookmarked =
+            (state as UscisQuizStateLoaded).isBookmarked(args.id);
 
         return Scaffold(
           appBar: AppBar(
@@ -132,11 +133,7 @@ class QuestionPage extends StatelessWidget {
             fontSize: 20,
           ),
           onOpen: (link) async {
-            if (await canLaunch(link.url)) {
-              await launch(link.url);
-            } else {
-              throw 'Could not launch $link';
-            }
+            if (await canLaunch(link.url)) await launch(link.url);
           },
         ),
       ),

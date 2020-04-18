@@ -44,6 +44,14 @@ class MyDrawer extends StatelessWidget {
                       context, BookmarkedQuestionsPage.routeName);
                 },
               ),
+                            ListTile(
+                leading: Icon(Icons.help),
+                title: Text('About'),
+                onTap: () {
+                  Navigator.pushReplacementNamed(
+                      context, AboutPage.routeName);
+                },
+              ),
             ],
           ),
         );
