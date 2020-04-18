@@ -24,7 +24,7 @@ class AboutPage extends StatelessWidget {
                 child: ListTile(
                   title: Linkify(
                     text:
-                        'This app displays the USCIS questions and answers. Here is the official USCIS website. https://www.uscis.gov/citizenship/educators/educational-products/100-civics-questions-and-answers-mp3-audio-english-version',
+                        'This is a simple utility app that displays the questions and answers of the USCIS civics quiz. Here is the official USCIS website: https://www.uscis.gov/citizenship/educators/educational-products/100-civics-questions-and-answers-mp3-audio-english-version. Hope it will help anybody.',
                     onOpen: (link) async {
                       if (await canLaunch(link.url)) await launch(link.url);
                     },
