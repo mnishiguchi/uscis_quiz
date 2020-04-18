@@ -29,13 +29,9 @@ class UscisQuizBloc extends Bloc<UscisQuizEvent, UscisQuizState> {
         if (state is! UscisQuizStateLoaded) return;
         yield* _onShuffleQuestions(state);
       }
-      if (event is UscisQuizEventAddBookmark) {
+      if (event is UscisQuizEventToggleBookmark) {
         if (state is! UscisQuizStateLoaded) return;
-        yield* _onBookmarkAdded(state, event.questionId);
-      }
-      if (event is UscisQuizEventRemoveBookmark) {
-        if (state is! UscisQuizStateLoaded) return;
-        yield* _onBookmarkRemoved(state, event.questionId);
+        yield* _onToggleBookmark(state, event.questionId);
       }
     } catch (error) {
       yield UscisQuizStateError(error: error);
@@ -62,33 +58,16 @@ class UscisQuizBloc extends Bloc<UscisQuizEvent, UscisQuizState> {
     );
   }
 
-  Stream<UscisQuizState> _onBookmarkAdded(
+  Stream<UscisQuizState> _onToggleBookmark(
     UscisQuizStateLoaded state,
     int questionId,
   ) async* {
-    final bookmarkedIds = _createBookmarkIdsFromState(state)..add(questionId);
-    uscisQuizRepository.setBookmarkedIds(bookmarkedIds);
+    final Set<int> bookmarkedIds = (state.isBookmarked(questionId))
+        ? (Set<int>.from(state.bookmarkedIds)..remove(questionId))
+        : (Set<int>.from(state.bookmarkedIds)..add(questionId));
+    uscisQuizRepository.saveBookmarkedIds(bookmarkedIds);
     yield state.copyWith(
       bookmarkedIds: bookmarkedIds,
     );
-  }
-
-  Stream<UscisQuizState> _onBookmarkRemoved(
-    UscisQuizStateLoaded state,
-    int questionId,
-  ) async* {
-    final bookmarkedIds = _createBookmarkIdsFromState(state)
-      ..remove(questionId);
-    uscisQuizRepository.setBookmarkedIds(bookmarkedIds);
-    yield state.copyWith(
-      bookmarkedIds: bookmarkedIds,
-    );
-  }
-
-  // Create a new instance so that the bloc will trigger the transition.
-  Set<int> _createBookmarkIdsFromState(UscisQuizStateLoaded state) {
-    return state.bookmarkedIds == null
-        ? Set<int>()
-        : Set.from(state.bookmarkedIds);
   }
 }

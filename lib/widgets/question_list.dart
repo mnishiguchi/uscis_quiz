@@ -53,26 +53,16 @@ class QuestionList extends StatelessWidget {
         child: Icon(
           isBookmarked ? Icons.bookmark : Icons.bookmark_border,
         ),
-        onTap: () {
-          isBookmarked
-              ? _removeBookmark(context, question.id)
-              : _addBookmark(context, question.id);
-        },
+        onTap: () => _toggleBookmark(context, question.id),
       ),
       onTap: () => onItemTap(question.id),
     );
   }
 
-  void _addBookmark(BuildContext context, int id) {
+  void _toggleBookmark(BuildContext context, int id) {
     context
         .bloc<UscisQuizBloc>()
-        .add(UscisQuizEventAddBookmark(questionId: id));
-  }
-
-  void _removeBookmark(BuildContext context, int id) {
-    context
-        .bloc<UscisQuizBloc>()
-        .add(UscisQuizEventRemoveBookmark(questionId: id));
+        .add(UscisQuizEventToggleBookmark(questionId: id));
   }
 
   bool _isBookmarked(BuildContext context, int id) =>

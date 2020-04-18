@@ -33,7 +33,7 @@ class UscisQuizRepository {
     );
   }
 
-  void setBookmarkedIds(Set<dynamic> bookmarkedIds) async {
+  void saveBookmarkedIds(Set<dynamic> bookmarkedIds) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setStringList(
       PREF_KEY_BOOKMARK_IDS,

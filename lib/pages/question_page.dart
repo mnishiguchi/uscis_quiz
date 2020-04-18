@@ -66,11 +66,7 @@ class QuestionPage extends StatelessWidget {
                 color: Colors.grey[100],
                 icon:
                     Icon(isBookmarked ? Icons.bookmark : Icons.bookmark_border),
-                onPressed: () async {
-                  isBookmarked
-                      ? _removeBookmark(context, currentQuestion.id)
-                      : _addBookmark(context, currentQuestion.id);
-                },
+                onPressed: () => _toggleBookmark(context, currentQuestion.id),
               ),
             ],
           ),
@@ -197,15 +193,9 @@ class QuestionPage extends StatelessWidget {
           ..['next'] = -1);
   }
 
-  void _addBookmark(BuildContext context, int id) {
+  void _toggleBookmark(BuildContext context, int id) {
     context
         .bloc<UscisQuizBloc>()
-        .add(UscisQuizEventAddBookmark(questionId: id));
-  }
-
-  void _removeBookmark(BuildContext context, int id) {
-    context
-        .bloc<UscisQuizBloc>()
-        .add(UscisQuizEventRemoveBookmark(questionId: id));
+        .add(UscisQuizEventToggleBookmark(questionId: id));
   }
 }

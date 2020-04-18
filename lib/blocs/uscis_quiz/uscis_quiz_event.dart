@@ -14,20 +14,10 @@ class UscisQuizEventFetch extends UscisQuizEvent {}
 
 class UscisQuizEventShuffle extends UscisQuizEvent {}
 
-class UscisQuizEventAddBookmark extends UscisQuizEvent {
+class UscisQuizEventToggleBookmark extends UscisQuizEvent {
   final int questionId;
 
-  const UscisQuizEventAddBookmark({@required this.questionId})
-      : assert(questionId != null);
-
-  @override
-  List<Object> get props => [questionId];
-}
-
-class UscisQuizEventRemoveBookmark extends UscisQuizEvent {
-  final int questionId;
-
-  const UscisQuizEventRemoveBookmark({@required this.questionId})
+  const UscisQuizEventToggleBookmark({@required this.questionId})
       : assert(questionId != null);
 
   @override
