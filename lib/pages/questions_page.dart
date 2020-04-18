@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:uscisquiz/blocs/blocs.dart';
-import 'package:uscisquiz/pages/pages.dart';
+import 'package:uscisquiz/models/models.dart';
 import 'package:uscisquiz/widgets/widgets.dart';
 
 // The default questions page.
@@ -10,6 +10,9 @@ class QuestionsPage extends StatelessWidget {
   static const routeName = '/questions';
 
   String pageTitle() => 'All Questions';
+
+  List<UscisQuizQuestion> findQuestions(UscisQuizStateLoaded state) =>
+      state.questions;
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +45,7 @@ class QuestionsPage extends StatelessWidget {
     }
 
     if (state is UscisQuizStateLoaded) {
-      return buildQuestions(context, state);
+      return _buildQuestions(context, findQuestions(state));
     }
 
     return Center(
@@ -50,14 +53,18 @@ class QuestionsPage extends StatelessWidget {
     );
   }
 
-  Widget buildQuestions(BuildContext context, UscisQuizStateLoaded state) {
+  Widget _buildQuestions(BuildContext context, List<UscisQuizQuestion> questions) {
     return QuestionList(
-      questions: state.questions,
+      questions: questions,
       onItemTap: (int questionId) {
-        Navigator.pushNamed(
+        Navigator.push(
           context,
-          QuestionPage.routeName,
-          arguments: QuestionPageArgs(id: questionId),
+          MaterialPageRoute(builder: (_) {
+            return QuestionPager(
+              questions: questions,
+              questionId: questionId,
+            );
+          }),
         );
       },
     );
