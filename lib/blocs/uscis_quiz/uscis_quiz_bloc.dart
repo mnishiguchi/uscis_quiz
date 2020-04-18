@@ -21,13 +21,20 @@ class UscisQuizBloc extends Bloc<UscisQuizEvent, UscisQuizState> {
   Stream<UscisQuizState> mapEventToState(UscisQuizEvent event) async* {
     try {
       if (event is UscisQuizEventFetch) {
+        // Currently we fetch only once.
         if (state is! UscisQuizStateUninitialized) return;
         yield* _onFetchQuestions();
       }
+      if (event is UscisQuizEventShuffle) {
+        if (state is! UscisQuizStateLoaded) return;
+        yield* _onShuffleQuestions(state);
+      }
       if (event is UscisQuizEventAddBookmark) {
+        if (state is! UscisQuizStateLoaded) return;
         yield* _onBookmarkAdded(state, event.questionId);
       }
       if (event is UscisQuizEventRemoveBookmark) {
+        if (state is! UscisQuizStateLoaded) return;
         yield* _onBookmarkRemoved(state, event.questionId);
       }
     } catch (error) {
@@ -42,6 +49,16 @@ class UscisQuizBloc extends Bloc<UscisQuizEvent, UscisQuizState> {
     yield UscisQuizStateLoaded(
       questions: questions,
       bookmarkedIds: bookmarkedIds,
+    );
+  }
+
+  Stream<UscisQuizState> _onShuffleQuestions(
+    UscisQuizStateLoaded state,
+  ) async* {
+    // Note: Duplicate the list first because state is immutable.
+    final duplicatedQuestions = List<UscisQuizQuestion>.from(state.questions);
+    yield state.copyWith(
+      questions: duplicatedQuestions..shuffle(),
     );
   }
 

@@ -21,7 +21,12 @@ class QuestionsPage extends StatelessWidget {
           drawer: MyDrawer(),
           appBar: AppBar(
             title: Text(pageTitle()),
-            actions: <Widget>[],
+            actions: <Widget>[
+              IconButton(
+                icon: Icon(Icons.shuffle),
+                onPressed: () => _shuffleQuestions(context),
+              ),
+            ],
           ),
           body: buildBody(context, state),
         );
@@ -56,5 +61,9 @@ class QuestionsPage extends StatelessWidget {
         );
       },
     );
+  }
+
+  void _shuffleQuestions(BuildContext context) {
+    context.bloc<UscisQuizBloc>().add(UscisQuizEventShuffle());
   }
 }

@@ -6,6 +6,9 @@ abstract class UscisQuizState extends Equatable {
 
   @override
   List<Object> get props => [];
+
+  @override
+  bool get stringify => true;
 }
 
 // Initial state.
@@ -16,8 +19,6 @@ class UscisQuizStateError extends UscisQuizState {
   final dynamic error;
 
   const UscisQuizStateError({this.error});
-
-  String toString() => 'UscisQuizStateError { error: ${error.toString()} }';
 }
 
 // Occurs once questions are loaded.

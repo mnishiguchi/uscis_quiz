@@ -5,9 +5,14 @@ abstract class UscisQuizEvent extends Equatable {
   const UscisQuizEvent();
 
   List<Object> get props => [];
+
+  @override
+  bool get stringify => true;
 }
 
 class UscisQuizEventFetch extends UscisQuizEvent {}
+
+class UscisQuizEventShuffle extends UscisQuizEvent {}
 
 class UscisQuizEventAddBookmark extends UscisQuizEvent {
   final int questionId;
@@ -17,10 +22,6 @@ class UscisQuizEventAddBookmark extends UscisQuizEvent {
 
   @override
   List<Object> get props => [questionId];
-
-  @override
-  String toString() =>
-      'UscisQuizEventAddBookmark { questionId: $questionId }';
 }
 
 class UscisQuizEventRemoveBookmark extends UscisQuizEvent {
@@ -31,8 +32,4 @@ class UscisQuizEventRemoveBookmark extends UscisQuizEvent {
 
   @override
   List<Object> get props => [questionId];
-
-  @override
-  String toString() =>
-      'UscisQuizEventRemoveBookmark { questionId: $questionId }';
 }
