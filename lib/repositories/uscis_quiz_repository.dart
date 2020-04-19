@@ -27,7 +27,9 @@ class UscisQuizRepository {
 
   Future<Set<int>> getBookmarkedIds() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    List<String> bookmarkedIds = prefs.getStringList(PREF_KEY_BOOKMARK_IDS);
+    List<String> bookmarkedIds =
+        prefs.getStringList(PREF_KEY_BOOKMARK_IDS) ?? List<String>();
+    assert(bookmarkedIds != null);
     return Set<int>.from(
       bookmarkedIds.map((id) => int.parse(id)),
     );
