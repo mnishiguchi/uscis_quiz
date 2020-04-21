@@ -25,20 +25,15 @@ class QuestionList extends StatelessWidget {
       );
     }
 
-    return ListView.builder(
+    return ListView.separated(
       padding: const EdgeInsets.all(16.0),
-      itemBuilder: (context, i) {
-        if (i.isOdd) return Divider();
-
-        // Find next suggestion index ignoring dividers.
-        // 0,1,2,3,4,5, ... => 0,0,1,1,2,2,...
-        final questionIndex = i ~/ 2;
-        final currentQuestion = questions[questionIndex];
+      separatorBuilder: (context, index) => Divider(),
+      itemBuilder: (context, index) {
+        final currentQuestion = questions[index];
         final isBookmarked = _isBookmarked(context, currentQuestion.id);
-
         return _buildRow(context, currentQuestion, isBookmarked);
       },
-      itemCount: questions.length * 2,
+      itemCount: questions.length,
     );
   }
 

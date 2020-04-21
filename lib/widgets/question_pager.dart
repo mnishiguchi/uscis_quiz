@@ -94,13 +94,14 @@ class QuestionPagerItem extends StatelessWidget {
       child: VisibilityToggle(
         summary: Text("Answers"),
         child: Card(
-          child: Column(
-            children: answerList
-                .map((answerEntry) => _buildAnswerListTile(
-                      context,
-                      answerEntry,
-                    ))
-                .toList(),
+          child: ListView.separated(
+            itemCount: answerList.length,
+            separatorBuilder: (context, index) => Divider(height: 1.0),
+            itemBuilder: (context, index) {
+              return _buildAnswerListTile(context, answerList[index]);
+            },
+            scrollDirection: Axis.vertical,
+            shrinkWrap: true,
           ),
         ),
       ),
@@ -109,15 +110,12 @@ class QuestionPagerItem extends StatelessWidget {
 
   Widget _buildAnswerListTile(BuildContext context, String answerEntry) {
     return ListTile(
-      title: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 10.0),
-        child: Linkify(
-          text: answerEntry,
-          style: Theme.of(context).textTheme.body1.copyWith(fontSize: 20.0),
-          onOpen: (link) async {
-            if (await canLaunch(link.url)) await launch(link.url);
-          },
-        ),
+      title: Linkify(
+        text: answerEntry,
+        style: Theme.of(context).textTheme.body1.copyWith(fontSize: 18.0),
+        onOpen: (link) async {
+          if (await canLaunch(link.url)) await launch(link.url);
+        },
       ),
     );
   }
