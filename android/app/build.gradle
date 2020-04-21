@@ -11,15 +11,18 @@ if (flutterRoot == null) {
     throw new GradleException("Flutter SDK not found. Define location with flutter.sdk in the local.properties file.")
 }
 
-def flutterVersionCode = localProperties.getProperty('flutter.versionCode')
-if (flutterVersionCode == null) {
-    flutterVersionCode = '1'
-}
+// A positive integer used as an internal version number.
+// Typically, you would release the first version of your app with versionCode
+// set to 1, then monotonically increase the value with each release, regardless
+// of whether the release constitutes a major or minor release.
+// https://developer.android.com/studio/publish/versioning
+def flutterVersionCode = '2'
 
-def flutterVersionName = localProperties.getProperty('flutter.versionName')
-if (flutterVersionName == null) {
-    flutterVersionName = '1.0'
-}
+// A string used as the version number shown to users.
+// The value is a string so that you can describe the app version as a
+// <major>.<minor>.<point> string, or as any other type of absolute or relative
+// version identifier.
+def flutterVersionName = '1.1'
 
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
